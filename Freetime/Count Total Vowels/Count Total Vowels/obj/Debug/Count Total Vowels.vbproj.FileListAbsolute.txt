@@ -1,0 +1,12 @@
+C:\Projects\Visual Basic .NET\Freetime\Count Total Vowels\Count Total Vowels\bin\Debug\Count Total Vowels.exe.config
+C:\Projects\Visual Basic .NET\Freetime\Count Total Vowels\Count Total Vowels\bin\Debug\Count Total Vowels.exe
+C:\Projects\Visual Basic .NET\Freetime\Count Total Vowels\Count Total Vowels\bin\Debug\Count Total Vowels.pdb
+C:\Projects\Visual Basic .NET\Freetime\Count Total Vowels\Count Total Vowels\bin\Debug\Count Total Vowels.xml
+C:\Projects\Visual Basic .NET\Freetime\Count Total Vowels\Count Total Vowels\obj\Debug\Count Total Vowels.vbprojAssemblyReference.cache
+C:\Projects\Visual Basic .NET\Freetime\Count Total Vowels\Count Total Vowels\obj\Debug\Count_Total_Vowels.frmTotalVowels.resources
+C:\Projects\Visual Basic .NET\Freetime\Count Total Vowels\Count Total Vowels\obj\Debug\Count_Total_Vowels.Resources.resources
+C:\Projects\Visual Basic .NET\Freetime\Count Total Vowels\Count Total Vowels\obj\Debug\Count Total Vowels.vbproj.GenerateResource.cache
+C:\Projects\Visual Basic .NET\Freetime\Count Total Vowels\Count Total Vowels\obj\Debug\Count Total Vowels.vbproj.CoreCompileInputs.cache
+C:\Projects\Visual Basic .NET\Freetime\Count Total Vowels\Count Total Vowels\obj\Debug\Count Total Vowels.exe
+C:\Projects\Visual Basic .NET\Freetime\Count Total Vowels\Count Total Vowels\obj\Debug\Count Total Vowels.xml
+C:\Projects\Visual Basic .NET\Freetime\Count Total Vowels\Count Total Vowels\obj\Debug\Count Total Vowels.pdb

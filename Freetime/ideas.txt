@@ -1,0 +1,5 @@
+1. Create a simple program that will put a random color for a word you input.
+2. Create a better version of hello with more colors & a text size.
+3. Create a program that has bank management with clients that are added.
+4. Create a program that has inventory management with items that are added.
+4. Create a program that has computer parts and it'll calculate the total cost together.

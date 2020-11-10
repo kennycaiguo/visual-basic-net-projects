@@ -1,0 +1,12 @@
+C:\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\bin\Debug\Hello (and Animation).exe.config
+C:\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\bin\Debug\Hello (and Animation).exe
+C:\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\bin\Debug\Hello (and Animation).pdb
+C:\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\bin\Debug\Hello (and Animation).xml
+C:\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\obj\Debug\Hello (and Animation).vbprojAssemblyReference.cache
+C:\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\obj\Debug\Hello__and_Animation_.Form1.resources
+C:\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\obj\Debug\Hello__and_Animation_.Resources.resources
+C:\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\obj\Debug\Hello (and Animation).vbproj.GenerateResource.cache
+C:\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\obj\Debug\Hello (and Animation).vbproj.CoreCompileInputs.cache
+C:\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\obj\Debug\Hello (and Animation).exe
+C:\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\obj\Debug\Hello (and Animation).xml
+C:\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\obj\Debug\Hello (and Animation).pdb

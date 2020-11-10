@@ -1,0 +1,12 @@
+C:\Projects\Visual Basic .NET\College\Chapter 5 Section 5.1 P 182\Chapter 5 Section 5.1 P 182\bin\Debug\Chapter 5 Section 5.1 P 182.exe.config
+C:\Projects\Visual Basic .NET\College\Chapter 5 Section 5.1 P 182\Chapter 5 Section 5.1 P 182\bin\Debug\Chapter 5 Section 5.1 P 182.exe
+C:\Projects\Visual Basic .NET\College\Chapter 5 Section 5.1 P 182\Chapter 5 Section 5.1 P 182\bin\Debug\Chapter 5 Section 5.1 P 182.pdb
+C:\Projects\Visual Basic .NET\College\Chapter 5 Section 5.1 P 182\Chapter 5 Section 5.1 P 182\bin\Debug\Chapter 5 Section 5.1 P 182.xml
+C:\Projects\Visual Basic .NET\College\Chapter 5 Section 5.1 P 182\Chapter 5 Section 5.1 P 182\obj\Debug\Chapter 5 Section 5.1 P 182.vbprojAssemblyReference.cache
+C:\Projects\Visual Basic .NET\College\Chapter 5 Section 5.1 P 182\Chapter 5 Section 5.1 P 182\obj\Debug\Chapter_5_Section_5._1_P_182.frmTemperature.resources
+C:\Projects\Visual Basic .NET\College\Chapter 5 Section 5.1 P 182\Chapter 5 Section 5.1 P 182\obj\Debug\Chapter_5_Section_5._1_P_182.Resources.resources
+C:\Projects\Visual Basic .NET\College\Chapter 5 Section 5.1 P 182\Chapter 5 Section 5.1 P 182\obj\Debug\Chapter 5 Section 5.1 P 182.vbproj.GenerateResource.cache
+C:\Projects\Visual Basic .NET\College\Chapter 5 Section 5.1 P 182\Chapter 5 Section 5.1 P 182\obj\Debug\Chapter 5 Section 5.1 P 182.vbproj.CoreCompileInputs.cache
+C:\Projects\Visual Basic .NET\College\Chapter 5 Section 5.1 P 182\Chapter 5 Section 5.1 P 182\obj\Debug\Chapter 5 Section 5.1 P 182.exe
+C:\Projects\Visual Basic .NET\College\Chapter 5 Section 5.1 P 182\Chapter 5 Section 5.1 P 182\obj\Debug\Chapter 5 Section 5.1 P 182.xml
+C:\Projects\Visual Basic .NET\College\Chapter 5 Section 5.1 P 182\Chapter 5 Section 5.1 P 182\obj\Debug\Chapter 5 Section 5.1 P 182.pdb

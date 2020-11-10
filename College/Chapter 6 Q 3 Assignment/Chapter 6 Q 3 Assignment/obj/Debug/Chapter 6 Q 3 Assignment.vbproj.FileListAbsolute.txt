@@ -1,0 +1,12 @@
+C:\Projects\Visual Basic .NET\College\Chapter 6 Q 3 Assignment\Chapter 6 Q 3 Assignment\bin\Debug\Chapter 6 Q 3 Assignment.exe.config
+C:\Projects\Visual Basic .NET\College\Chapter 6 Q 3 Assignment\Chapter 6 Q 3 Assignment\bin\Debug\Chapter 6 Q 3 Assignment.exe
+C:\Projects\Visual Basic .NET\College\Chapter 6 Q 3 Assignment\Chapter 6 Q 3 Assignment\bin\Debug\Chapter 6 Q 3 Assignment.pdb
+C:\Projects\Visual Basic .NET\College\Chapter 6 Q 3 Assignment\Chapter 6 Q 3 Assignment\bin\Debug\Chapter 6 Q 3 Assignment.xml
+C:\Projects\Visual Basic .NET\College\Chapter 6 Q 3 Assignment\Chapter 6 Q 3 Assignment\obj\Debug\Chapter 6 Q 3 Assignment.vbprojAssemblyReference.cache
+C:\Projects\Visual Basic .NET\College\Chapter 6 Q 3 Assignment\Chapter 6 Q 3 Assignment\obj\Debug\Chapter_6_Q_3_Assignment.frmMatrix.resources
+C:\Projects\Visual Basic .NET\College\Chapter 6 Q 3 Assignment\Chapter 6 Q 3 Assignment\obj\Debug\Chapter_6_Q_3_Assignment.Resources.resources
+C:\Projects\Visual Basic .NET\College\Chapter 6 Q 3 Assignment\Chapter 6 Q 3 Assignment\obj\Debug\Chapter 6 Q 3 Assignment.vbproj.GenerateResource.cache
+C:\Projects\Visual Basic .NET\College\Chapter 6 Q 3 Assignment\Chapter 6 Q 3 Assignment\obj\Debug\Chapter 6 Q 3 Assignment.vbproj.CoreCompileInputs.cache
+C:\Projects\Visual Basic .NET\College\Chapter 6 Q 3 Assignment\Chapter 6 Q 3 Assignment\obj\Debug\Chapter 6 Q 3 Assignment.exe
+C:\Projects\Visual Basic .NET\College\Chapter 6 Q 3 Assignment\Chapter 6 Q 3 Assignment\obj\Debug\Chapter 6 Q 3 Assignment.xml
+C:\Projects\Visual Basic .NET\College\Chapter 6 Q 3 Assignment\Chapter 6 Q 3 Assignment\obj\Debug\Chapter 6 Q 3 Assignment.pdb

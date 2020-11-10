@@ -1,0 +1,12 @@
+C:\Projects\Visual Basic .NET\College\Chapter 4 Section 4.4 Q 30\Chapter 4 Section 4.4 Q 30\bin\Debug\Chapter 4 Section 4.4 Q 30.exe.config
+C:\Projects\Visual Basic .NET\College\Chapter 4 Section 4.4 Q 30\Chapter 4 Section 4.4 Q 30\bin\Debug\Chapter 4 Section 4.4 Q 30.exe
+C:\Projects\Visual Basic .NET\College\Chapter 4 Section 4.4 Q 30\Chapter 4 Section 4.4 Q 30\bin\Debug\Chapter 4 Section 4.4 Q 30.pdb
+C:\Projects\Visual Basic .NET\College\Chapter 4 Section 4.4 Q 30\Chapter 4 Section 4.4 Q 30\bin\Debug\Chapter 4 Section 4.4 Q 30.xml
+C:\Projects\Visual Basic .NET\College\Chapter 4 Section 4.4 Q 30\Chapter 4 Section 4.4 Q 30\obj\Debug\Chapter 4 Section 4.4 Q 30.vbprojAssemblyReference.cache
+C:\Projects\Visual Basic .NET\College\Chapter 4 Section 4.4 Q 30\Chapter 4 Section 4.4 Q 30\obj\Debug\Chapter_4_Section_4._4_Q_30.frmHello.resources
+C:\Projects\Visual Basic .NET\College\Chapter 4 Section 4.4 Q 30\Chapter 4 Section 4.4 Q 30\obj\Debug\Chapter_4_Section_4._4_Q_30.Resources.resources
+C:\Projects\Visual Basic .NET\College\Chapter 4 Section 4.4 Q 30\Chapter 4 Section 4.4 Q 30\obj\Debug\Chapter 4 Section 4.4 Q 30.vbproj.GenerateResource.cache
+C:\Projects\Visual Basic .NET\College\Chapter 4 Section 4.4 Q 30\Chapter 4 Section 4.4 Q 30\obj\Debug\Chapter 4 Section 4.4 Q 30.vbproj.CoreCompileInputs.cache
+C:\Projects\Visual Basic .NET\College\Chapter 4 Section 4.4 Q 30\Chapter 4 Section 4.4 Q 30\obj\Debug\Chapter 4 Section 4.4 Q 30.exe
+C:\Projects\Visual Basic .NET\College\Chapter 4 Section 4.4 Q 30\Chapter 4 Section 4.4 Q 30\obj\Debug\Chapter 4 Section 4.4 Q 30.xml
+C:\Projects\Visual Basic .NET\College\Chapter 4 Section 4.4 Q 30\Chapter 4 Section 4.4 Q 30\obj\Debug\Chapter 4 Section 4.4 Q 30.pdb

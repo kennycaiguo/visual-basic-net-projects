@@ -1,0 +1,12 @@
+C:\Projects\Visual Basic .NET\Freetime\Reverse String\Reverse String\bin\Debug\Reverse String.exe.config
+C:\Projects\Visual Basic .NET\Freetime\Reverse String\Reverse String\bin\Debug\Reverse String.exe
+C:\Projects\Visual Basic .NET\Freetime\Reverse String\Reverse String\bin\Debug\Reverse String.pdb
+C:\Projects\Visual Basic .NET\Freetime\Reverse String\Reverse String\bin\Debug\Reverse String.xml
+C:\Projects\Visual Basic .NET\Freetime\Reverse String\Reverse String\obj\Debug\Reverse String.vbprojAssemblyReference.cache
+C:\Projects\Visual Basic .NET\Freetime\Reverse String\Reverse String\obj\Debug\Reverse_String.frmReverseString.resources
+C:\Projects\Visual Basic .NET\Freetime\Reverse String\Reverse String\obj\Debug\Reverse_String.Resources.resources
+C:\Projects\Visual Basic .NET\Freetime\Reverse String\Reverse String\obj\Debug\Reverse String.vbproj.GenerateResource.cache
+C:\Projects\Visual Basic .NET\Freetime\Reverse String\Reverse String\obj\Debug\Reverse String.vbproj.CoreCompileInputs.cache
+C:\Projects\Visual Basic .NET\Freetime\Reverse String\Reverse String\obj\Debug\Reverse String.exe
+C:\Projects\Visual Basic .NET\Freetime\Reverse String\Reverse String\obj\Debug\Reverse String.xml
+C:\Projects\Visual Basic .NET\Freetime\Reverse String\Reverse String\obj\Debug\Reverse String.pdb
