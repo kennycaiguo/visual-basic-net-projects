@@ -19,9 +19,6 @@ Public Class frmStructureTest
     ' List of student objects used for storing information for all students.
     Public Shared studentsList As New List(Of Student)
 
-    ' Cached student count.
-    Public Shared cachedStudentCount As Integer = 0
-
     ' Runs checks before adding student into studentsList.
     Private Sub btnAddStudent(sender As Object, e As EventArgs) Handles btnAdd.Click
 
@@ -244,10 +241,8 @@ Public Class frmStructureTest
         ' Step 1:
         ' Space Checker v2 (Nov 11. 2020)
         If txtBoxSearch.Text.Trim.Length = 0 Then
-            If cachedStudentCount = studentsList.Count Then
-                If Not listBoxResults.Items.Count = 0 AndAlso Not listBoxResults.Items(0).Equals("No search results found.") Then
-                    Return
-                End If
+            If Not listBoxResults.Items.Count = 0 AndAlso Not listBoxResults.Items(0).Equals("No search results found.") Then
+                Return
             End If
 
             ' Step 1.1:
@@ -258,8 +253,6 @@ Public Class frmStructureTest
             For Each student In localStudentsList
                 addResult(student)
             Next
-
-            cachedStudentCount = localStudentsList.Count
 
             Return
         End If
@@ -288,7 +281,6 @@ Public Class frmStructureTest
                     End If
                 Next
 
-                cachedStudentCount = localStudentsList.Count
                 Return
             End If
 
@@ -313,7 +305,6 @@ Public Class frmStructureTest
                     End If
                 Next
 
-                cachedStudentCount = localStudentsList.Count
                 Return
             End If
         ElseIf search.Contains("graduation year") Then ' Step 2.3:
@@ -337,8 +328,6 @@ Public Class frmStructureTest
                         addResult(student)
                     End If
                 Next
-
-                cachedStudentCount = localStudentsList.Count
 
                 Return
             End If
@@ -390,8 +379,6 @@ Public Class frmStructureTest
                         addResult(student)
                     Next
                 End If
-
-                cachedStudentCount = localStudentsList.Count
 
                 Return
             End If
