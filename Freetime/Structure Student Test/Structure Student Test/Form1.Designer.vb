@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmStructureTest
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmStructureTest
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.lblStudentInfo = New System.Windows.Forms.Label()
@@ -54,7 +54,6 @@ Partial Class frmStructureTest
         Me.lblSearch = New System.Windows.Forms.Label()
         Me.txtBoxSearch = New System.Windows.Forms.TextBox()
         Me.timerDebugClearing = New System.Windows.Forms.Timer(Me.components)
-        Me.timerSearch = New System.Windows.Forms.Timer(Me.components)
         Me.groupBoxGradYear.SuspendLayout()
         Me.groupBoxAge.SuspendLayout()
         Me.groupBoxGPA.SuspendLayout()
@@ -360,10 +359,6 @@ Partial Class frmStructureTest
         Me.timerDebugClearing.Enabled = True
         Me.timerDebugClearing.Interval = 3000
         '
-        'timerSearch
-        '
-        Me.timerSearch.Enabled = True
-        '
         'frmStructureTest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -433,5 +428,4 @@ Partial Class frmStructureTest
     Friend WithEvents lblSearch As Label
     Friend WithEvents txtBoxSearch As TextBox
     Friend WithEvents timerDebugClearing As Timer
-    Friend WithEvents timerSearch As Timer
 End Class

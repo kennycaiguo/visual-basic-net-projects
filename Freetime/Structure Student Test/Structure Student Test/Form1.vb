@@ -10,6 +10,7 @@ Public Structure Student
     Dim gradePointAverage As Double
 End Structure
 
+' Main form class
 Public Class frmStructureTest
 
     ' Localized variable used for debugging
@@ -66,7 +67,8 @@ Public Class frmStructureTest
             Return
         End If
 
-        Dim age As Integer = 0
+        ' Determines age dependent on radio button checked.
+        Dim age As Integer = 18
 
         If rButtonAge15.Checked Then
             age = 15
@@ -74,11 +76,10 @@ Public Class frmStructureTest
             age = 16
         ElseIf rButtonAge17.Checked Then
             age = 17
-        Else
-            age = 18
         End If
 
-        Dim gradYear As Integer = DateTime.Now.Year
+        ' Determines graduation year dependent on radio button checked.
+        Dim gradYear As Integer = 2024
 
         If rButtonGradYear21.Checked Then
             gradYear = 2021
@@ -86,11 +87,10 @@ Public Class frmStructureTest
             gradYear = 2022
         ElseIf rButtonGradYear23.Checked Then
             gradYear = 2023
-        Else
-            gradYear = 2024
         End If
 
-        Dim gpa As Decimal = 0.0D
+        ' Determines gpa dependent on radio button checked.
+        Dim gpa As Decimal = 4D
 
         If rButtonGPA1.Checked Then
             gpa = 1D
@@ -98,8 +98,6 @@ Public Class frmStructureTest
             gpa = 2D
         ElseIf rButtonGPA3.Checked Then
             gpa = 3D
-        Else
-            gpa = 4D
         End If
 
         addStudent(txtBoxFirstName.Text, txtBoxLastName.Text, age, gradYear, gpa)
@@ -148,8 +146,56 @@ Public Class frmStructureTest
         listBoxDebugInformation.Items.Add(DateTime.Now.ToShortTimeString & ": " & info)
     End Sub
 
+    Sub addStudent(ByRef firstName As String, ByRef lastName As String, ByRef age As Integer, ByRef gradYear As Integer, ByRef gpa As Decimal)
+        Dim student As Student
+
+        student.firstName = firstName
+        student.lastName = lastName
+        student.age = age
+        Student.graduationYear = gradYear
+        student.gradePointAverage = gpa
+
+        studentsList.Add(student)
+
+        logDebug("Student " & student.firstName & " " & student.lastName & " added to database.")
+    End Sub
+
+    ' Clears results from GUI
+    Sub clearResults()
+        listBoxResults.Items.Clear()
+    End Sub
+
+    ' Adds student result to GUI
+    Sub addResult(ByRef student As Student)
+        addResult(student.firstName & " " & student.lastName & " Age " & student.age & " GPA " & student.gradePointAverage & " Graduation " & student.graduationYear)
+    End Sub
+
+    ' Adds result to GUI
+    Sub addResult(ByRef result As String)
+        listBoxResults.Items.Add(result)
+    End Sub
+
+    ' Runs when the search engine is unable to find any results.
+    Sub noResultsFound()
+        clearResults()
+
+        addResult("No search results found.")
+    End Sub
+
+    Private Sub frmStructureTest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        addStudent("Ethan", "Magyar", 18, 2021, 4D)
+        addStudent("Kyle", "Matzen", 18, 2021, 3D)
+        addStudent("Jacob", "Cobb", 17, 2022, 4D)
+        addStudent("Mark", "Bassily", 18, 2021, 3D)
+        addStudent("Nicole", "Ziegler", 17, 2021, 4D)
+        addStudent("Taylor", "Fisher", 17, 2021, 4D)
+        addStudent("Juliana", "Mik", 17, 2021, 4D)
+        addStudent("Devon", "Eastlack", 17, 2021, 4D)
+        addStudent("Adriana", "Palumbo", 17, 2021, 4D)
+    End Sub
+
     ' Updates database information sorting objects based on names.
-    Private Sub timerSearch_Tick(sender As Object, e As EventArgs) Handles timerSearch.Tick
+    Private Sub txtBoxSearch_TextChanged(sender As Object, e As EventArgs) Handles txtBoxSearch.TextChanged
         If studentsList.Count = 0 Then
             logDebug("No entries found.")
             Return
@@ -164,41 +210,31 @@ Public Class frmStructureTest
         '
         ' 2.1 Check if common phrase starts with "gpa"
         ' 2.1.1 Remove anything else other than decimal number.
-        ' 2.1.1.1 If no decimal is found, return "No results found".
-        ' 2.1.1.2 If decimal is found, find GPAs that are greater than or equal to requested GPA.
+        ' 2.1.1.1 If decimal is found, find GPAs that are greater than or equal to requested GPA.
         '
         ' 2.2 Check if common phrase starts with "age"
         ' 2.2.1 Remove anything else other than number.
-        ' 2.2.1.1 If no number is found, return "No results found".
-        ' 2.2.1.2 If number is valid age, find students that are at that age.
+        ' 2.2.1.1 If number is valid age, find students that are at that age.
         '
         ' 2.3 Check if common phrase starts with "graduation year", or "grad year"
         ' 2.3.1 Remove anything else other than graduation year.
-        ' 2.3.1.1 If no graduation year is found, return "No results found".
-        ' 2.3.1.2 If graduation year is found, find students with that graduation year.
-        '
+        ' 2.3.1.1 If graduation year is found, find students with that graduation year.
         '
         ' 2.4 If none of the common phrases were found, check first/last names.
-        ' 2.4.1 If there are first names but no last names with result, return in a format of
+        ' 2.4.1 If there are first names, show results of
         '
         ' Students with first name of Result:
         ' Kyle Matzen (other info)
+        ' Next Student...
         '
-        ' 2.4.2 If there are first names and last names with result, return in a format of
-        '
-        ' Students with first name of Result:
-        ' Kyle Matzen (other info)
+        ' 2.4.2 If there are last names with result, show results of
         '
         ' Students with last name of Result:
         ' Matzen Kyle (other info)
+        ' Next Student...
         '
-        ' 2.4.3 If there are last names but no first names with result, return in a format of
-        ' 
-        ' Students with last name of Result:
-        ' Matzen Kyle (other info)
+        ' 2.4.3 If no results, return "No search results found."
         '
-        ' 2.4.4 If there are no first/last names with result, return "No results found."
-
 
         ' Localized variable for search.
         Dim search As String = txtBoxSearch.Text.ToLower
@@ -220,7 +256,7 @@ Public Class frmStructureTest
             logDebug("Cleared results, and sorted by first names.")
 
             For Each student In localStudentsList
-                addResult(student.firstName & " " & student.lastName & " Age " & student.age & " GPA " & student.gradePointAverage & " Graduation " & student.graduationYear)
+                addResult(student)
             Next
 
             cachedStudentCount = localStudentsList.Count
@@ -233,6 +269,7 @@ Public Class frmStructureTest
 
             If IsNumeric(System.Text.RegularExpressions.Regex.Replace(search, "[^.0-9]", "")) Then
 
+                ' Step 2.1.1:
                 Dim gpa As Decimal = CDec(System.Text.RegularExpressions.Regex.Replace(search, "[^.0-9]", ""))
 
                 If gpa < 1.0 Or gpa > 4.0 Then
@@ -242,14 +279,14 @@ Public Class frmStructureTest
 
                 clearResults()
 
-                Dim localStudentsList = studentsList.ToArray.OrderBy(Function(s) s.gradePointAverage)
-                localStudentsList = localStudentsList.ToArray.OrderBy(Function(s) s.firstName)
+                Dim localStudentsList = studentsList.ToArray.OrderBy(Function(s) s.firstName)
 
                 logDebug("Cleared results, and sorted by GPA.")
 
                 For Each student In localStudentsList
+                    ' Step 2.1.1.1:
                     If student.gradePointAverage >= gpa Then
-                        addResult(student.firstName & " " & student.lastName & " Age " & student.age & " GPA " & student.gradePointAverage & " Graduation " & student.graduationYear)
+                        addResult(student)
                     End If
                 Next
 
@@ -259,8 +296,10 @@ Public Class frmStructureTest
 
         ElseIf search.Contains("age") Then ' Step 2.2:
             If IsNumeric(System.Text.RegularExpressions.Regex.Replace(search, "[^0-9]", "")) Then
+                ' Step 2.2.1:
                 Dim age As Integer = CInt(System.Text.RegularExpressions.Regex.Replace(search, "[^.0-9]", ""))
 
+                ' Step 2.2.1.1:
                 If age < 16 Or age > 18 Then
                     noResultsFound()
                     Return
@@ -268,14 +307,13 @@ Public Class frmStructureTest
 
                 clearResults()
 
-                Dim localStudentsList = studentsList.ToArray.OrderBy(Function(s) s.age)
-                localStudentsList = localStudentsList.ToArray.OrderBy(Function(s) s.firstName)
+                Dim localStudentsList = studentsList.ToArray.OrderBy(Function(s) s.firstName)
 
                 logDebug("Cleared results, and sorted by age.")
 
                 For Each student In localStudentsList
                     If student.age >= age Then
-                        addResult(student.firstName & " " & student.lastName & " Age " & student.age & " GPA " & student.gradePointAverage & " Graduation " & student.graduationYear)
+                        addResult(student)
                     End If
                 Next
 
@@ -285,8 +323,10 @@ Public Class frmStructureTest
         ElseIf search.Contains("graduation year") Or search.Contains("grad year") Then ' Step 2.3:
 
             If IsNumeric(System.Text.RegularExpressions.Regex.Replace(search, "[^0-9]", "")) Then
+                ' Step 2.3.1:
                 Dim year As Integer = CInt(System.Text.RegularExpressions.Regex.Replace(search, "[^.0-9]", ""))
 
+                ' Step 2.3.1.1:
                 If year < 2021 Or year > 2024 Then
                     noResultsFound()
                     Return
@@ -294,65 +334,83 @@ Public Class frmStructureTest
 
                 clearResults()
 
-                Dim localStudentsList = studentsList.ToArray.OrderBy(Function(s) s.graduationYear)
-                localStudentsList = localStudentsList.ToArray.OrderBy(Function(s) s.firstName)
+                ' Step 2.3.1.2:
+                Dim localStudentsList = studentsList.ToArray.OrderBy(Function(s) s.firstName)
 
                 logDebug("Cleared results, and sorted by graduation year.")
 
                 For Each student In localStudentsList
                     If student.graduationYear >= year Then
-                        addResult(student.firstName & " " & student.lastName & " Age " & student.age & " GPA " & student.gradePointAverage & " Graduation " & student.graduationYear)
+                        addResult(student)
                     End If
                 Next
 
                 cachedStudentCount = localStudentsList.Count
+
                 Return
             End If
 
         Else ' Step 2.4:
-            logDebug("search isn't a common phrase check if first name/last name.")
+            Dim firstNameIndexes As Integer = 0
+            Dim lastNameIndexes As Integer = 0
+
+            ' Orders students by first name.
+            Dim localStudentsList = studentsList.ToArray.OrderBy(Function(s) s.firstName)
+
+            For Each student In localStudentsList
+                If student.firstName.ToLower.Equals(search) Then
+                    firstNameIndexes += 1
+                End If
+
+                If student.lastName.ToLower.Equals(search) Then
+                    lastNameIndexes += 1
+                End If
+            Next
+
+            If firstNameIndexes > 0 Or lastNameIndexes > 0 Then
+                ' Step 2.4.1:
+                If firstNameIndexes > 0 Then
+                    clearResults()
+
+                    addResult("Students with first name of " & txtBoxSearch.Text & ":")
+                    addResult("")
+
+                    For Each student In localStudentsList
+                        If student.firstName.ToLower.Equals(search) Then
+                            addResult(student)
+                        End If
+                    Next
+
+                End If
+
+                ' Step 2.4.2:
+                If lastNameIndexes > 0 Then
+                    If firstNameIndexes > 0 Then
+                        addResult("")
+                    Else
+                        clearResults()
+                    End If
+
+                    ' Orders students by last name name.
+                    localStudentsList = studentsList.ToArray.OrderBy(Function(s) s.lastName)
+
+                    addResult("Students with last name of " & txtBoxSearch.Text & ":")
+                    addResult("")
+
+                    For Each student In localStudentsList
+                        If student.lastName.ToLower.Equals(search) Then
+                            addResult(student)
+                        End If
+                    Next
+                End If
+
+                cachedStudentCount = localStudentsList.Count
+
+                Return
+            End If
+
         End If
 
         noResultsFound()
-    End Sub
-
-    Sub addStudent(ByRef firstName As String, ByRef lastName As String, ByRef age As Integer, ByRef gradYear As Integer, ByRef gpa As Decimal)
-        Dim student As Student
-
-        student.firstName = firstName
-        student.lastName = lastName
-        student.age = age
-        Student.graduationYear = gradYear
-        student.gradePointAverage = gpa
-
-        studentsList.Add(student)
-
-        logDebug("Student " & student.firstName & " " & student.lastName & " added to database.")
-    End Sub
-
-    Sub clearResults()
-        listBoxResults.Items.Clear()
-    End Sub
-
-    Sub addResult(ByRef result As String)
-        listBoxResults.Items.Add(result)
-    End Sub
-
-    Sub noResultsFound()
-        clearResults()
-
-        addResult("No search results found.")
-    End Sub
-
-    Private Sub frmStructureTest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        addStudent("Ethan", "Magyar", 18, 2021, 4D)
-        addStudent("Kyle", "Matzen", 18, 2021, 3D)
-        addStudent("Jacob", "Cobb", 17, 2022, 4D)
-        addStudent("Mark", "Bassily", 18, 2021, 3D)
-        addStudent("Nicole", "Ziegler", 17, 2021, 4D)
-        addStudent("Taylor", "Fisher", 17, 2021, 4D)
-        addStudent("Juliana", "Mik", 17, 2021, 4D)
-        addStudent("Devon", "Eastlack", 17, 2021, 4D)
-        addStudent("Adriana", "Palumbo", 17, 2021, 4D)
     End Sub
 End Class
