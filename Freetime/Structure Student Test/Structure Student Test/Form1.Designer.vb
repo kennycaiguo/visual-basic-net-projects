@@ -22,14 +22,11 @@ Partial Class frmStructureTest
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Me.lblStudentInfo = New System.Windows.Forms.Label()
         Me.lblFirstName = New System.Windows.Forms.Label()
         Me.lblLastName = New System.Windows.Forms.Label()
         Me.lblAge = New System.Windows.Forms.Label()
         Me.lblGradYear = New System.Windows.Forms.Label()
-        Me.lblDebugInformation = New System.Windows.Forms.Label()
-        Me.listBoxDebugInformation = New System.Windows.Forms.ListBox()
         Me.lblResults = New System.Windows.Forms.Label()
         Me.listBoxResults = New System.Windows.Forms.ListBox()
         Me.btnAdd = New System.Windows.Forms.Button()
@@ -53,7 +50,7 @@ Partial Class frmStructureTest
         Me.rButtonGPA1 = New System.Windows.Forms.RadioButton()
         Me.lblSearch = New System.Windows.Forms.Label()
         Me.txtBoxSearch = New System.Windows.Forms.TextBox()
-        Me.timerDebugClearing = New System.Windows.Forms.Timer(Me.components)
+        Me.btnLoad = New System.Windows.Forms.Button()
         Me.groupBoxGradYear.SuspendLayout()
         Me.groupBoxAge.SuspendLayout()
         Me.groupBoxGPA.SuspendLayout()
@@ -104,45 +101,28 @@ Partial Class frmStructureTest
         Me.lblGradYear.TabIndex = 4
         Me.lblGradYear.Text = "Graduation Year:"
         '
-        'lblDebugInformation
-        '
-        Me.lblDebugInformation.AutoSize = True
-        Me.lblDebugInformation.Location = New System.Drawing.Point(404, 13)
-        Me.lblDebugInformation.Name = "lblDebugInformation"
-        Me.lblDebugInformation.Size = New System.Drawing.Size(94, 13)
-        Me.lblDebugInformation.TabIndex = 5
-        Me.lblDebugInformation.Text = "Debug Information"
-        '
-        'listBoxDebugInformation
-        '
-        Me.listBoxDebugInformation.FormattingEnabled = True
-        Me.listBoxDebugInformation.Location = New System.Drawing.Point(407, 34)
-        Me.listBoxDebugInformation.Name = "listBoxDebugInformation"
-        Me.listBoxDebugInformation.Size = New System.Drawing.Size(372, 537)
-        Me.listBoxDebugInformation.TabIndex = 6
-        '
         'lblResults
         '
         Me.lblResults.AutoSize = True
-        Me.lblResults.Location = New System.Drawing.Point(15, 252)
+        Me.lblResults.Location = New System.Drawing.Point(12, 243)
         Me.lblResults.Name = "lblResults"
-        Me.lblResults.Size = New System.Drawing.Size(42, 13)
+        Me.lblResults.Size = New System.Drawing.Size(45, 13)
         Me.lblResults.TabIndex = 7
-        Me.lblResults.Text = "Results"
+        Me.lblResults.Text = "Results:"
         '
         'listBoxResults
         '
         Me.listBoxResults.FormattingEnabled = True
-        Me.listBoxResults.Location = New System.Drawing.Point(18, 268)
+        Me.listBoxResults.Location = New System.Drawing.Point(16, 259)
         Me.listBoxResults.Name = "listBoxResults"
-        Me.listBoxResults.Size = New System.Drawing.Size(376, 303)
+        Me.listBoxResults.Size = New System.Drawing.Size(376, 147)
         Me.listBoxResults.TabIndex = 8
         '
         'btnAdd
         '
-        Me.btnAdd.Location = New System.Drawing.Point(16, 157)
+        Me.btnAdd.Location = New System.Drawing.Point(297, 157)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(75, 23)
+        Me.btnAdd.Size = New System.Drawing.Size(91, 23)
         Me.btnAdd.TabIndex = 9
         Me.btnAdd.Text = "Add Student"
         Me.btnAdd.UseVisualStyleBackColor = True
@@ -354,16 +334,21 @@ Partial Class frmStructureTest
         Me.txtBoxSearch.Size = New System.Drawing.Size(375, 20)
         Me.txtBoxSearch.TabIndex = 17
         '
-        'timerDebugClearing
+        'btnLoad
         '
-        Me.timerDebugClearing.Enabled = True
-        Me.timerDebugClearing.Interval = 3000
+        Me.btnLoad.Location = New System.Drawing.Point(15, 157)
+        Me.btnLoad.Name = "btnLoad"
+        Me.btnLoad.Size = New System.Drawing.Size(91, 23)
+        Me.btnLoad.TabIndex = 18
+        Me.btnLoad.Text = "Load Students"
+        Me.btnLoad.UseVisualStyleBackColor = True
         '
         'frmStructureTest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(799, 591)
+        Me.ClientSize = New System.Drawing.Size(407, 420)
+        Me.Controls.Add(Me.btnLoad)
         Me.Controls.Add(Me.txtBoxSearch)
         Me.Controls.Add(Me.lblSearch)
         Me.Controls.Add(Me.groupBoxGPA)
@@ -375,8 +360,6 @@ Partial Class frmStructureTest
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.listBoxResults)
         Me.Controls.Add(Me.lblResults)
-        Me.Controls.Add(Me.listBoxDebugInformation)
-        Me.Controls.Add(Me.lblDebugInformation)
         Me.Controls.Add(Me.lblGradYear)
         Me.Controls.Add(Me.lblAge)
         Me.Controls.Add(Me.lblLastName)
@@ -402,8 +385,6 @@ Partial Class frmStructureTest
     Friend WithEvents lblLastName As Label
     Friend WithEvents lblAge As Label
     Friend WithEvents lblGradYear As Label
-    Friend WithEvents lblDebugInformation As Label
-    Friend WithEvents listBoxDebugInformation As ListBox
     Friend WithEvents lblResults As Label
     Friend WithEvents listBoxResults As ListBox
     Friend WithEvents btnAdd As Button
@@ -427,5 +408,5 @@ Partial Class frmStructureTest
     Friend WithEvents rButtonGPA1 As RadioButton
     Friend WithEvents lblSearch As Label
     Friend WithEvents txtBoxSearch As TextBox
-    Friend WithEvents timerDebugClearing As Timer
+    Friend WithEvents btnLoad As Button
 End Class

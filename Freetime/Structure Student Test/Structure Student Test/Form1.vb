@@ -13,8 +13,8 @@ End Structure
 ' Main form class
 Public Class frmStructureTest
 
-    ' Localized variable used for debugging
-    Public Shared debug As Boolean = False
+    ' Localized variable for keeping track if database was grabbed.
+    Public Shared database As Boolean = False
 
     ' List of student objects used for storing information for all students.
     Public Shared studentsList As New List(Of Student)
@@ -27,40 +27,33 @@ Public Class frmStructureTest
         ' 2. Is there a last name provided?
         ' 3. Is there a age selected?
         ' 4. Is there a graduation year selected?
-        ' 5. Is there a GPA selected?
-
-        ' Step 1:
+        ' 5. Is there a GPA selected?      ' Step 1:
 
         If txtBoxFirstName.Text = "" Then
-            logDebug("[S] No first name is entered.")
             Return
         End If
 
         ' Step 2:
 
         If txtBoxLastName.Text = "" Then
-            logDebug("[S] No last name is entered.")
             Return
         End If
 
         ' Step 3:
 
         If Not rButtonAge15.Checked And Not rButtonAge16.Checked And Not rButtonAge17.Checked And Not rButtonAge18.Checked Then
-            logDebug("[S] No age is selected.")
             Return
         End If
 
         ' Step 4:
 
         If Not rButtonGradYear21.Checked And Not rButtonGradYear22.Checked And Not rButtonGradYear23.Checked And Not rButtonGradYear24.Checked Then
-            logDebug("[S] No graduation year is selected.")
             Return
         End If
 
         ' Step 5:
 
         If Not rButtonGPA1.Checked And Not rButtonGPA2.Checked And Not rButtonGPA3.Checked And Not rButtonGPA4.Checked Then
-            logDebug("[S] No gpa is selected.")
             Return
         End If
 
@@ -115,34 +108,6 @@ Public Class frmStructureTest
         Next
     End Sub
 
-    ' Clears debug console every 3s if there are more than 30 lines.
-    Private Sub timerDebugClear(sender As Object, e As EventArgs) Handles timerDebugClearing.Tick
-
-        If listBoxDebugInformation.Items.Count >= 30 Then
-            If Not timerDebugClearing.Interval = 1 Then
-                timerDebugClearing.Interval = 1
-            End If
-
-            listBoxDebugInformation.Items.RemoveAt(0)
-            listBoxDebugInformation.Update()
-        Else
-            timerDebugClearing.Interval = 3000
-        End If
-
-    End Sub
-
-    ' Logs information into a local console of the program.
-    Sub logDebug(ByRef info As String)
-        Dim consoleSize As Integer = listBoxDebugInformation.Items.Count
-
-        ' Checks if the previous message is the same, before adding to prevent spam.
-        If consoleSize > 0 AndAlso listBoxDebugInformation.Items(consoleSize - 1).ToString.Contains(info) Then
-            Return
-        End If
-
-        listBoxDebugInformation.Items.Add(DateTime.Now.ToShortTimeString & ": " & info)
-    End Sub
-
     Sub addStudent(ByRef firstName As String, ByRef lastName As String, ByRef age As Integer, ByRef gradYear As Integer, ByRef gpa As Decimal)
         Dim student As Student
 
@@ -154,7 +119,6 @@ Public Class frmStructureTest
 
         studentsList.Add(student)
 
-        logDebug("Student " & student.firstName & " " & student.lastName & " added to database.")
     End Sub
 
     ' Clears results from GUI
@@ -179,22 +143,9 @@ Public Class frmStructureTest
         addResult("No search results found.")
     End Sub
 
-    Private Sub frmStructureTest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        addStudent("Ethan", "Magyar", 18, 2021, 4D)
-        addStudent("Kyle", "Matzen", 18, 2021, 3D)
-        addStudent("Jacob", "Cobb", 17, 2022, 4D)
-        addStudent("Mark", "Bassily", 18, 2021, 3D)
-        addStudent("Nicole", "Ziegler", 17, 2021, 4D)
-        addStudent("Taylor", "Fisher", 17, 2021, 4D)
-        addStudent("Juliana", "Mik", 17, 2021, 4D)
-        addStudent("Devon", "Eastlack", 17, 2021, 4D)
-        addStudent("Adriana", "Palumbo", 17, 2021, 4D)
-    End Sub
-
     ' Updates database information sorting objects based on names.
     Private Sub txtBoxSearch_TextChanged(sender As Object, e As EventArgs) Handles txtBoxSearch.TextChanged
         If studentsList.Count = 0 Then
-            logDebug("No entries found.")
             Return
         End If
 
@@ -248,8 +199,6 @@ Public Class frmStructureTest
             ' Step 1.1:
             clearResults()
 
-            logDebug("Cleared results, and sorted by first names.")
-
             For Each student In localStudentsList
                 addResult(student)
             Next
@@ -271,8 +220,6 @@ Public Class frmStructureTest
                 End If
 
                 clearResults()
-
-                logDebug("Cleared results, and sorted by GPA.")
 
                 For Each student In localStudentsList
                     ' Step 2.1.1.1:
@@ -297,8 +244,6 @@ Public Class frmStructureTest
 
                 clearResults()
 
-                logDebug("Cleared results, and sorted by age.")
-
                 For Each student In localStudentsList
                     If student.age >= age Then
                         addResult(student)
@@ -320,8 +265,6 @@ Public Class frmStructureTest
                 End If
 
                 clearResults()
-
-                logDebug("Cleared results, and sorted by graduation year.")
 
                 For Each student In localStudentsList
                     If student.graduationYear >= year Then
@@ -386,5 +329,46 @@ Public Class frmStructureTest
         End If
 
         noResultsFound()
+    End Sub
+
+    ' Loads database information if not loaded already.
+    Private Sub btnLoad_Click(sender As Object, e As EventArgs) Handles btnLoad.Click
+
+        ' Grabs all lines for file database.txt.
+        Dim students As String() = IO.File.ReadAllLines("database.txt")
+
+        ' Loops through each student in database file.
+        For Each student In students
+            ' Needed when splitting between name and info.
+            If Not student.Contains(",") Then
+                Continue For
+            End If
+
+            Dim studentSplit As String() = student.Split(",")
+
+            Dim name As String() = studentSplit(0).Split(" ")
+            Dim info As String() = studentSplit(1).Split(" ")
+
+            ' Checks if the line's length are correct for what the database requires
+            If Not name.Length = 2 AndAlso Not info.Length = 4 Then
+                Continue For
+            End If
+
+            ' Checks if the info for age, year, and gpa are numbers
+            If Not IsNumeric(info(0)) AndAlso Not IsNumeric(info(1)) AndAlso Not IsNumeric(info(2)) Then
+                Continue For
+            End If
+
+            ' Adds student into studentsList database
+            addStudent(name(0), name(1), CInt(info(0)), CInt(info(1)), CDec(info(2)))
+        Next
+
+        database = True
+
+        For Each student In studentsList
+            addResult(student)
+        Next
+
+        listBoxResults.Update()
     End Sub
 End Class
