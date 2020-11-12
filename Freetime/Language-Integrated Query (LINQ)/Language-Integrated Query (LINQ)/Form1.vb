@@ -34,16 +34,48 @@
 '
 Public Class frmLINQ
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Data source
-        Dim numbers() As Integer = {0, 1, 2, 3, 4, 5, 6}
-
-        ' Query creation
-
-        Dim evensQuery = From num In numbers Where num Mod 2 = 0 Select num
-
+        '
+        '
+        ' Example 1 (from zoom video)
+        ' Data source:
+        ' Dim numbers() As Integer = {0, 1, 2, 3, 4, 5, 6}
+        '
+        ' Query creation:
+        '
+        ' Dim evensQuery = From num In numbers Where num Mod 2 = 0 Select num
+        '
+        ' Query execution:
+        '
+        ' For Each number In evensQuery
+        '   Console.WriteLine(number)
+        ' Next
+        '
+        '
+        ' Example 2
+        ' Data source:
+        ' Dim names As String() = {"Maro", "Mark", "Jake", "Ryan", "Kyle", "Jarret", "Ralphie"}
+        '
+        ' Query creation:
+        '
+        ' Dim namesLengthQuery = From localName In names Where localName.Length > 4 Select localName
+        '
+        ' Query execution:
+        '
+        ' For Each localName In namesLengthQuery
+        '   Console.WriteLine(localName)
+        ' Next
+        '
+        '
+        ' Example 3
+        ' Data source:
+        ' Dim iAmExamples As String() = {"student", "developer", "learner", "enthrepenuer", "friend"}
+        '
+        ' Query creation:
+        ' Dim iAmExamplesQuery = From example In iAmExamples Order By example Ascending
+        '
         ' Query execution
-        For Each number In evensQuery
-            Console.WriteLine(number)
-        Next
+        ' For Each example In iAmExamplesQuery
+        '   Console.WriteLine("I am a " & example)
+        ' Next
     End Sub
 End Class
