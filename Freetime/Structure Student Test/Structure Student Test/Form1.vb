@@ -118,7 +118,7 @@ Public Class frmStructureTest
         Next
     End Sub
 
-    ' Clears debug console every 3s if there are more than 10 lines.
+    ' Clears debug console every 3s if there are more than 30 lines.
     Private Sub timerDebugClear(sender As Object, e As EventArgs) Handles timerDebugClearing.Tick
 
         If listBoxDebugInformation.Items.Count >= 30 Then
@@ -201,6 +201,8 @@ Public Class frmStructureTest
             Return
         End If
 
+        Dim localStudentsList = studentsList.ToArray.OrderBy(Function(s) s.firstName)
+
         ' Steps:
         '
         ' 1. Check if search bar is empty.
@@ -251,8 +253,6 @@ Public Class frmStructureTest
             ' Step 1.1:
             clearResults()
 
-            Dim localStudentsList = studentsList.ToArray.OrderBy(Function(s) s.firstName)
-
             logDebug("Cleared results, and sorted by first names.")
 
             For Each student In localStudentsList
@@ -278,8 +278,6 @@ Public Class frmStructureTest
                 End If
 
                 clearResults()
-
-                Dim localStudentsList = studentsList.ToArray.OrderBy(Function(s) s.firstName)
 
                 logDebug("Cleared results, and sorted by GPA.")
 
@@ -307,8 +305,6 @@ Public Class frmStructureTest
 
                 clearResults()
 
-                Dim localStudentsList = studentsList.ToArray.OrderBy(Function(s) s.firstName)
-
                 logDebug("Cleared results, and sorted by age.")
 
                 For Each student In localStudentsList
@@ -320,7 +316,7 @@ Public Class frmStructureTest
                 cachedStudentCount = localStudentsList.Count
                 Return
             End If
-        ElseIf search.Contains("graduation year") Or search.Contains("grad year") Then ' Step 2.3:
+        ElseIf search.Contains("graduation year") Then ' Step 2.3:
 
             If IsNumeric(System.Text.RegularExpressions.Regex.Replace(search, "[^0-9]", "")) Then
                 ' Step 2.3.1:
@@ -333,9 +329,6 @@ Public Class frmStructureTest
                 End If
 
                 clearResults()
-
-                ' Step 2.3.1.2:
-                Dim localStudentsList = studentsList.ToArray.OrderBy(Function(s) s.firstName)
 
                 logDebug("Cleared results, and sorted by graduation year.")
 
@@ -351,41 +344,37 @@ Public Class frmStructureTest
             End If
 
         Else ' Step 2.4:
-            Dim firstNameIndexes As Integer = 0
-            Dim lastNameIndexes As Integer = 0
 
-            ' Orders students by first name.
-            Dim localStudentsList = studentsList.ToArray.OrderBy(Function(s) s.firstName)
+            Dim firstNameResults As New List(Of Student)
+            Dim lastNameResults As New List(Of Student)
 
             For Each student In localStudentsList
                 If student.firstName.ToLower.Equals(search) Then
-                    firstNameIndexes += 1
+                    firstNameResults.Add(student)
                 End If
 
                 If student.lastName.ToLower.Equals(search) Then
-                    lastNameIndexes += 1
+                    lastNameResults.Add(student)
                 End If
             Next
 
-            If firstNameIndexes > 0 Or lastNameIndexes > 0 Then
+            If firstNameResults.Count > 0 Or lastNameResults.Count > 0 Then
                 ' Step 2.4.1:
-                If firstNameIndexes > 0 Then
+                If firstNameResults.Count > 0 Then
                     clearResults()
 
                     addResult("Students with first name of " & txtBoxSearch.Text & ":")
                     addResult("")
 
-                    For Each student In localStudentsList
-                        If student.firstName.ToLower.Equals(search) Then
-                            addResult(student)
-                        End If
+                    For Each student In firstNameResults
+                        addResult(student)
                     Next
 
                 End If
 
                 ' Step 2.4.2:
-                If lastNameIndexes > 0 Then
-                    If firstNameIndexes > 0 Then
+                If lastNameResults.Count > 0 Then
+                    If lastNameResults.Count > 0 Then
                         addResult("")
                     Else
                         clearResults()
@@ -397,10 +386,8 @@ Public Class frmStructureTest
                     addResult("Students with last name of " & txtBoxSearch.Text & ":")
                     addResult("")
 
-                    For Each student In localStudentsList
-                        If student.lastName.ToLower.Equals(search) Then
-                            addResult(student)
-                        End If
+                    For Each student In lastNameResults
+                        addResult(student)
                     Next
                 End If
 
