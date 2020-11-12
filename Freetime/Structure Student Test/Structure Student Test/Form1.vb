@@ -121,26 +121,13 @@ Public Class frmStructureTest
 
     End Sub
 
-    ' Clears results from GUI
-    Sub clearResults()
-        listBoxResults.Items.Clear()
-    End Sub
-
-    ' Adds student result to GUI
-    Sub addResult(ByRef student As Student)
-        addResult(student.firstName & " " & student.lastName & " Age " & student.age & " GPA " & student.gradePointAverage & " Graduation " & student.graduationYear)
-    End Sub
-
-    ' Adds result to GUI
-    Sub addResult(ByRef result As String)
-        listBoxResults.Items.Add(result)
-    End Sub
-
     ' Runs when the search engine is unable to find any results.
     Sub noResultsFound()
-        clearResults()
+        lblResults.Text = "Results: None"
 
-        addResult("No search results found.")
+        dataGridViewResults.DataSource = Nothing
+        dataGridViewResults.Rows.Clear()
+
     End Sub
 
     ' Updates database information sorting objects based on names.
@@ -148,8 +135,6 @@ Public Class frmStructureTest
         If studentsList.Count = 0 Then
             Return
         End If
-
-        Dim localStudentsList = studentsList.ToArray.OrderBy(Function(s) s.firstName)
 
         ' Steps:
         '
@@ -170,21 +155,6 @@ Public Class frmStructureTest
         ' 2.3.1 Remove anything else other than graduation year.
         ' 2.3.1.1 If graduation year is found, find students with that graduation year.
         '
-        ' 2.4 If none of the common phrases were found, check first/last names.
-        ' 2.4.1 If there are first names, show results of
-        '
-        ' Students with first name of Result:
-        ' Kyle Matzen (other info)
-        ' Next Student...
-        '
-        ' 2.4.2 If there are last names with result, show results of
-        '
-        ' Students with last name of Result:
-        ' Matzen Kyle (other info)
-        ' Next Student...
-        '
-        ' 2.4.3 If no results, return "No search results found."
-        '
 
         ' Localized variable for search.
         Dim search As String = txtBoxSearch.Text.ToLower
@@ -192,16 +162,16 @@ Public Class frmStructureTest
         ' Step 1:
         ' Space Checker v2 (Nov 11. 2020)
         If txtBoxSearch.Text.Trim.Length = 0 Then
-            If Not listBoxResults.Items.Count = 0 AndAlso Not listBoxResults.Items(0).Equals("No search results found.") Then
+            If lblResults.Equals("Results: None") Then
                 Return
             End If
 
             ' Step 1.1:
-            clearResults()
+            Dim query = From student In studentsList
+                        Order By student.firstName Ascending
+                        Select student.firstName, student.lastName, student.age, student.gradePointAverage, student.graduationYear
 
-            For Each student In localStudentsList
-                addResult(student)
-            Next
+            showResults(query.ToList)
 
             Return
         End If
@@ -212,21 +182,19 @@ Public Class frmStructureTest
             If IsNumeric(System.Text.RegularExpressions.Regex.Replace(search, "[^.0-9]", "")) Then
 
                 ' Step 2.1.1:
-                Dim gpa As Decimal = CDec(System.Text.RegularExpressions.Regex.Replace(search, "[^.0-9]", ""))
+                Dim localGPA As Decimal = CDec(System.Text.RegularExpressions.Regex.Replace(search, "[^.0-9]", ""))
 
-                If gpa < 1.0 Or gpa > 4.0 Then
+                Dim query = From student In studentsList
+                            Where student.gradePointAverage >= localGPA
+                            Order By student.firstName Ascending
+                            Select student.firstName, student.lastName, student.age, student.gradePointAverage, student.graduationYear
+
+                If query.Count = 0 Then
                     noResultsFound()
                     Return
                 End If
 
-                clearResults()
-
-                For Each student In localStudentsList
-                    ' Step 2.1.1.1:
-                    If student.gradePointAverage >= gpa Then
-                        addResult(student)
-                    End If
-                Next
+                showResults(query.ToList)
 
                 Return
             End If
@@ -234,21 +202,20 @@ Public Class frmStructureTest
         ElseIf search.Contains("age") Then ' Step 2.2:
             If IsNumeric(System.Text.RegularExpressions.Regex.Replace(search, "[^0-9]", "")) Then
                 ' Step 2.2.1:
-                Dim age As Integer = CInt(System.Text.RegularExpressions.Regex.Replace(search, "[^.0-9]", ""))
+                Dim localAge As Integer = CInt(System.Text.RegularExpressions.Regex.Replace(search, "[^.0-9]", ""))
 
                 ' Step 2.2.1.1:
-                If age < 16 Or age > 18 Then
+                Dim query = From student In studentsList
+                            Where student.age = localAge
+                            Order By student.firstName Ascending
+                            Select student.firstName, student.lastName, student.age, student.gradePointAverage, student.graduationYear
+
+                If query.Count = 0 Then
                     noResultsFound()
                     Return
                 End If
 
-                clearResults()
-
-                For Each student In localStudentsList
-                    If student.age >= age Then
-                        addResult(student)
-                    End If
-                Next
+                showResults(query.ToList)
 
                 Return
             End If
@@ -256,76 +223,23 @@ Public Class frmStructureTest
 
             If IsNumeric(System.Text.RegularExpressions.Regex.Replace(search, "[^0-9]", "")) Then
                 ' Step 2.3.1:
-                Dim year As Integer = CInt(System.Text.RegularExpressions.Regex.Replace(search, "[^.0-9]", ""))
+                Dim localYear As Integer = CInt(System.Text.RegularExpressions.Regex.Replace(search, "[^.0-9]", ""))
+
+                Dim query = From student In studentsList
+                            Where student.graduationYear = localYear
+                            Order By student.firstName Ascending
+                            Select student.firstName, student.lastName, student.age, student.gradePointAverage, student.graduationYear
 
                 ' Step 2.3.1.1:
-                If year < 2021 Or year > 2024 Then
+                If query.Count = 0 Then
                     noResultsFound()
                     Return
                 End If
 
-                clearResults()
-
-                For Each student In localStudentsList
-                    If student.graduationYear >= year Then
-                        addResult(student)
-                    End If
-                Next
+                showResults(query.ToList)
 
                 Return
             End If
-
-        Else ' Step 2.4:
-
-            Dim firstNameResults As New List(Of Student)
-            Dim lastNameResults As New List(Of Student)
-
-            For Each student In localStudentsList
-                If student.firstName.ToLower.Equals(search) Then
-                    firstNameResults.Add(student)
-                End If
-
-                If student.lastName.ToLower.Equals(search) Then
-                    lastNameResults.Add(student)
-                End If
-            Next
-
-            If firstNameResults.Count > 0 Or lastNameResults.Count > 0 Then
-                ' Step 2.4.1:
-                If firstNameResults.Count > 0 Then
-                    clearResults()
-
-                    addResult("Students with first name of " & txtBoxSearch.Text & ":")
-                    addResult("")
-
-                    For Each student In firstNameResults
-                        addResult(student)
-                    Next
-
-                End If
-
-                ' Step 2.4.2:
-                If lastNameResults.Count > 0 Then
-                    If lastNameResults.Count > 0 Then
-                        addResult("")
-                    Else
-                        clearResults()
-                    End If
-
-                    ' Orders students by last name name.
-                    localStudentsList = studentsList.ToArray.OrderBy(Function(s) s.lastName)
-
-                    addResult("Students with last name of " & txtBoxSearch.Text & ":")
-                    addResult("")
-
-                    For Each student In lastNameResults
-                        addResult(student)
-                    Next
-                End If
-
-                Return
-            End If
-
         End If
 
         noResultsFound()
@@ -333,6 +247,10 @@ Public Class frmStructureTest
 
     ' Loads database information if not loaded already.
     Private Sub btnLoad_Click(sender As Object, e As EventArgs) Handles btnLoad.Click
+
+        If database Then
+            Return
+        End If
 
         ' Grabs all lines for file database.txt.
         Dim students As String() = IO.File.ReadAllLines("database.txt")
@@ -365,10 +283,31 @@ Public Class frmStructureTest
 
         database = True
 
-        For Each student In studentsList
-            addResult(student)
-        Next
+        Dim query = From student In studentsList
+                    Order By student.firstName Ascending
+                    Select student.firstName, student.lastName, student.age, student.gradePointAverage, student.graduationYear
 
-        listBoxResults.Update()
+        showResults(query.ToList)
+    End Sub
+
+    Sub showResults(ByRef query As Object)
+        lblResults.Text = "Results:"
+
+        dataGridViewResults.DataSource = Nothing
+        dataGridViewResults.Rows.Clear()
+
+        dataGridViewResults.DataSource = query
+        dataGridViewResults.CurrentCell = Nothing
+        dataGridViewResults.Columns("firstName").HeaderText = "First Name"
+        dataGridViewResults.Columns("lastName").HeaderText = "Last Name"
+        dataGridViewResults.Columns("age").HeaderText = "Age"
+        dataGridViewResults.Columns("gradePointAverage").HeaderText = "GPA"
+        dataGridViewResults.Columns("graduationYear").HeaderText = "Year"
+    End Sub
+
+    ' Loads application and hides first column
+    Private Sub frmStructureTest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        dataGridViewResults.BackgroundColor = Color.White
+        dataGridViewResults.RowHeadersVisible = False
     End Sub
 End Class

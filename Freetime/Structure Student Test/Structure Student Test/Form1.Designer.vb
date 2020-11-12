@@ -28,7 +28,6 @@ Partial Class frmStructureTest
         Me.lblAge = New System.Windows.Forms.Label()
         Me.lblGradYear = New System.Windows.Forms.Label()
         Me.lblResults = New System.Windows.Forms.Label()
-        Me.listBoxResults = New System.Windows.Forms.ListBox()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.lblGPA = New System.Windows.Forms.Label()
         Me.groupBoxGradYear = New System.Windows.Forms.GroupBox()
@@ -51,9 +50,11 @@ Partial Class frmStructureTest
         Me.lblSearch = New System.Windows.Forms.Label()
         Me.txtBoxSearch = New System.Windows.Forms.TextBox()
         Me.btnLoad = New System.Windows.Forms.Button()
+        Me.dataGridViewResults = New System.Windows.Forms.DataGridView()
         Me.groupBoxGradYear.SuspendLayout()
         Me.groupBoxAge.SuspendLayout()
         Me.groupBoxGPA.SuspendLayout()
+        CType(Me.dataGridViewResults, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblStudentInfo
@@ -104,19 +105,11 @@ Partial Class frmStructureTest
         'lblResults
         '
         Me.lblResults.AutoSize = True
-        Me.lblResults.Location = New System.Drawing.Point(12, 243)
+        Me.lblResults.Location = New System.Drawing.Point(421, 39)
         Me.lblResults.Name = "lblResults"
         Me.lblResults.Size = New System.Drawing.Size(45, 13)
         Me.lblResults.TabIndex = 7
         Me.lblResults.Text = "Results:"
-        '
-        'listBoxResults
-        '
-        Me.listBoxResults.FormattingEnabled = True
-        Me.listBoxResults.Location = New System.Drawing.Point(16, 259)
-        Me.listBoxResults.Name = "listBoxResults"
-        Me.listBoxResults.Size = New System.Drawing.Size(376, 147)
-        Me.listBoxResults.TabIndex = 8
         '
         'btnAdd
         '
@@ -321,7 +314,7 @@ Partial Class frmStructureTest
         'lblSearch
         '
         Me.lblSearch.AutoSize = True
-        Me.lblSearch.Location = New System.Drawing.Point(13, 194)
+        Me.lblSearch.Location = New System.Drawing.Point(421, 13)
         Me.lblSearch.Name = "lblSearch"
         Me.lblSearch.Size = New System.Drawing.Size(44, 13)
         Me.lblSearch.TabIndex = 16
@@ -329,9 +322,9 @@ Partial Class frmStructureTest
         '
         'txtBoxSearch
         '
-        Me.txtBoxSearch.Location = New System.Drawing.Point(16, 210)
+        Me.txtBoxSearch.Location = New System.Drawing.Point(471, 10)
         Me.txtBoxSearch.Name = "txtBoxSearch"
-        Me.txtBoxSearch.Size = New System.Drawing.Size(375, 20)
+        Me.txtBoxSearch.Size = New System.Drawing.Size(473, 20)
         Me.txtBoxSearch.TabIndex = 17
         '
         'btnLoad
@@ -343,11 +336,20 @@ Partial Class frmStructureTest
         Me.btnLoad.Text = "Load Students"
         Me.btnLoad.UseVisualStyleBackColor = True
         '
+        'dataGridViewResults
+        '
+        Me.dataGridViewResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dataGridViewResults.Location = New System.Drawing.Point(424, 55)
+        Me.dataGridViewResults.Name = "dataGridViewResults"
+        Me.dataGridViewResults.Size = New System.Drawing.Size(520, 147)
+        Me.dataGridViewResults.TabIndex = 19
+        '
         'frmStructureTest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(407, 420)
+        Me.ClientSize = New System.Drawing.Size(1061, 209)
+        Me.Controls.Add(Me.dataGridViewResults)
         Me.Controls.Add(Me.btnLoad)
         Me.Controls.Add(Me.txtBoxSearch)
         Me.Controls.Add(Me.lblSearch)
@@ -358,7 +360,6 @@ Partial Class frmStructureTest
         Me.Controls.Add(Me.groupBoxGradYear)
         Me.Controls.Add(Me.lblGPA)
         Me.Controls.Add(Me.btnAdd)
-        Me.Controls.Add(Me.listBoxResults)
         Me.Controls.Add(Me.lblResults)
         Me.Controls.Add(Me.lblGradYear)
         Me.Controls.Add(Me.lblAge)
@@ -375,6 +376,7 @@ Partial Class frmStructureTest
         Me.groupBoxAge.PerformLayout()
         Me.groupBoxGPA.ResumeLayout(False)
         Me.groupBoxGPA.PerformLayout()
+        CType(Me.dataGridViewResults, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -386,7 +388,6 @@ Partial Class frmStructureTest
     Friend WithEvents lblAge As Label
     Friend WithEvents lblGradYear As Label
     Friend WithEvents lblResults As Label
-    Friend WithEvents listBoxResults As ListBox
     Friend WithEvents btnAdd As Button
     Friend WithEvents lblGPA As Label
     Friend WithEvents groupBoxGradYear As GroupBox
@@ -409,4 +410,5 @@ Partial Class frmStructureTest
     Friend WithEvents lblSearch As Label
     Friend WithEvents txtBoxSearch As TextBox
     Friend WithEvents btnLoad As Button
+    Friend WithEvents dataGridViewResults As DataGridView
 End Class
