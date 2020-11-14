@@ -94,7 +94,7 @@ Partial Class frmVoteForOne
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(208, 193)
+        Me.ClientSize = New System.Drawing.Size(208, 188)
         Me.Controls.Add(Me.txtBoxVote)
         Me.Controls.Add(Me.btnCast)
         Me.Controls.Add(Me.btnClear)

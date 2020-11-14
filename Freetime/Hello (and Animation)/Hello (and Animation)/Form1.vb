@@ -32,6 +32,7 @@ Public Class frmHelloWithAnimation
         lblHello.Text = language
     End Function
 
+    ' Resets animation start.
     Private Sub resetAnimation()
         animationIndex = 0
     End Sub
@@ -55,8 +56,6 @@ Public Class frmHelloWithAnimation
                     animationIndex = 0
                     Return
                 End If
-
-                ' Finish opposite text going Hello, Hell, Hel, He, H
 
                 lblHello.Text = helloText.Substring(0, animationIndex)
 
