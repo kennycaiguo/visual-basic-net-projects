@@ -10,3 +10,15 @@ C:\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animatio
 C:\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\obj\Debug\Hello (and Animation).exe
 C:\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\obj\Debug\Hello (and Animation).xml
 C:\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\obj\Debug\Hello (and Animation).pdb
+C:\Users\kyleo\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\bin\Debug\Hello (and Animation).exe.config
+C:\Users\kyleo\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\bin\Debug\Hello (and Animation).exe
+C:\Users\kyleo\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\bin\Debug\Hello (and Animation).pdb
+C:\Users\kyleo\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\bin\Debug\Hello (and Animation).xml
+C:\Users\kyleo\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\obj\Debug\Hello (and Animation).vbprojAssemblyReference.cache
+C:\Users\kyleo\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\obj\Debug\Hello__and_Animation_.frmHelloWithAnimation.resources
+C:\Users\kyleo\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\obj\Debug\Hello__and_Animation_.Resources.resources
+C:\Users\kyleo\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\obj\Debug\Hello (and Animation).vbproj.GenerateResource.cache
+C:\Users\kyleo\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\obj\Debug\Hello (and Animation).vbproj.CoreCompileInputs.cache
+C:\Users\kyleo\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\obj\Debug\Hello (and Animation).exe
+C:\Users\kyleo\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\obj\Debug\Hello (and Animation).xml
+C:\Users\kyleo\Projects\Visual Basic .NET\Freetime\Hello (and Animation)\Hello (and Animation)\obj\Debug\Hello (and Animation).pdb
