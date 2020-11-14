@@ -290,14 +290,19 @@ Public Class frmStructureTest
         showResults(query.ToList)
     End Sub
 
+    ' Updates the results shown to the user
     Sub showResults(ByRef query As Object)
         lblResults.Text = "Results:"
 
+        ' Clears current results
         dataGridViewResults.DataSource = Nothing
         dataGridViewResults.Rows.Clear()
 
+        ' Updates the source of data
         dataGridViewResults.DataSource = query
         dataGridViewResults.CurrentCell = Nothing
+
+        ' Sets the individual column headers.
         dataGridViewResults.Columns("firstName").HeaderText = "First Name"
         dataGridViewResults.Columns("lastName").HeaderText = "Last Name"
         dataGridViewResults.Columns("age").HeaderText = "Age"
@@ -305,7 +310,7 @@ Public Class frmStructureTest
         dataGridViewResults.Columns("graduationYear").HeaderText = "Year"
     End Sub
 
-    ' Loads application and hides first column
+    ' Loads application and hides first row.
     Private Sub frmStructureTest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         dataGridViewResults.BackgroundColor = Color.White
         dataGridViewResults.RowHeadersVisible = False
