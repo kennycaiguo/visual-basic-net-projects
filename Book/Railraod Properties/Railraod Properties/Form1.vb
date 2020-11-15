@@ -4,14 +4,10 @@
             Dim name As String = listBoxProperties.Items(listBoxProperties.SelectedIndex)
 
             Select Case name
-                Case "Reading"
-                    MessageBox.Show(name & " is a railroad.", "Wrong")
-                Case "Pennsylvania"
-                    MessageBox.Show(name & " is a railroad.", "Wrong")
-                Case "B & O"
-                    MessageBox.Show(name & " is a railroad.", "Wrong")
-                Case Else
+                Case "Short Line"
                     MessageBox.Show("Short Line is a bus company.", "Correct")
+                Case Else
+                    MessageBox.Show(name & " is a railroad.", "Wrong")
             End Select
         End If
     End Sub
