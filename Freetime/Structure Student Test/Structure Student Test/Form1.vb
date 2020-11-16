@@ -327,8 +327,4 @@ Public Class frmStructureTest
         dataGridViewResults.BackgroundColor = Color.White
         dataGridViewResults.RowHeadersVisible = False
     End Sub
-
-    Private Sub dataGridViewResults_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dataGridViewResults.CellContentClick
-
-    End Sub
 End Class
