@@ -69,6 +69,33 @@ Public Class frmLoginRegisterSystem
 
     Private Sub registerForm(sender As Object, e As EventArgs) Handles btnRegister.Click
 
+        ' Check if username was entered.
+
+        Dim username As String = txtBoxRegisterUsername.Text
+
+        If username.Count = 0 Then
+            MessageBox.Show("You must enter a username.", Me.Text)
+            Return
+        End If
+
+        If username.Count > 20 Then
+            MessageBox.Show("Username must be less than 20 characters.", Me.Text)
+            Return
+        End If
+
+        ' Checks if there is a database before attemping to check/add them.
+        If Not IO.File.Exists("database.txt") Then
+
+        End If
+
     End Sub
+
+    Function IsUsername(ByRef username As String) As Boolean
+        If username.Count = 0 Or username.Count > 20 Then Return False
+
+        Dim invalidCharacters As Integer = 0
+
+        Return True
+    End Function
 
 End Class
