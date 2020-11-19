@@ -37,7 +37,6 @@ Public Class frmLoginRegisterSystem
 
             lblRegister.Visible = True
 
-
             Return
         End If
 
@@ -89,13 +88,4 @@ Public Class frmLoginRegisterSystem
         End If
 
     End Sub
-
-    Function IsUsername(ByRef username As String) As Boolean
-        If username.Count = 0 Or username.Count > 20 Then Return False
-
-        Dim invalidCharacters As Integer = 0
-
-        Return True
-    End Function
-
 End Class
