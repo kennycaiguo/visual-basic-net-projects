@@ -265,7 +265,6 @@ Public Class frmAirplaneData
             Dim localAirplane As Airplane = planeArray(index)
 
             If localAirplane.model.StartsWith(input) Then
-                Console.WriteLine(localAirplane.model)
                 avgSeats += localAirplane.seatCount
                 sector += localAirplane.sector
                 fuelBurn += localAirplane.fuelBurnRate
