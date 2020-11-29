@@ -43,15 +43,23 @@ Public Class frmAirplaneData
     ' Calculates the amount of a specific plane
     Function NumberOfPlane(ByVal planeName As String) As Integer
 
+        ' Creates empty array of Airplane objects (structures)
         Dim planeArray As Airplane() = {}
+        ' Creates array with each line from text file Airplane.
         Dim planeDataArray As String() = IO.File.ReadAllLines("Airplane.txt")
 
+        ' Resizes empty array to size of planeDataArray.
         Array.Resize(planeArray, planeDataArray.Length)
 
+        ' Loops through all lines of empty array planeArray counting by 1
         For index = 0 To planeArray.Count - 1 Step 1
+            ' Creates a localized local Airplane object (structure)
             Dim localAirplane As New Airplane
+
+            ' Splits airplane data on index line of planeDataArray by a comma.
             Dim planeStr() As String = planeDataArray(index).Split(",")
 
+            ' Grabs data that is split into file.
             localAirplane.model = planeStr(0)
             localAirplane.firstFlightYear = CInt(planeStr(1))
             localAirplane.seatCount = CInt(planeStr(2))
@@ -59,22 +67,27 @@ Public Class frmAirplaneData
             localAirplane.fuelBurnRate = CDbl(planeStr(4))
             localAirplane.fuelPerSeat = CDbl(planeStr(5))
 
+            ' Updates object at index in planeArray to localized local Airplane object (structure) that has data.
             planeArray(index) = localAirplane
         Next
 
+        ' Loops through all planes and only adds the planes that start with planeName
         Dim query = From plane In planeArray
-                    Where plane.model.Contains(planeName)
+                    Where plane.model.StartsWith(planeName)
 
+        ' Returns the amount of planes in query.
         Return query.Count
     End Function
 
     ' Calculates round trip fuel by doubling sector (fuel one way)
     Function RoundTripFuel(ByVal sector As Integer) As Integer
+        ' Returns round trip fuel by multiplying by 2.
         Return (sector * 2)
     End Function
 
     ' Calculates a decimal value that calculates the average amount between two values.
     Function CalculateAverages(ByVal dividend As Double, ByVal divisor As Integer) As Double
+        ' First divides (dividend by divisor), then rounds to first decimal if needed.
         Return Math.Round(dividend / divisor, 1)
     End Function
 
@@ -212,14 +225,19 @@ Public Class frmAirplaneData
             planeArray(index) = localAirplane
         Next
 
+        ' Sets current input to empty.
         input = ""
 
+        ' Runs a loop while input is empty.
         While input = ""
+            ' Runs sub GetInput()
             GetInput()
         End While
 
+        ' Creates a localized boolean that checks if a plane is valid.
         Dim valid As Boolean = False
 
+        ' Loops through all lines of plane object (structure) array planeArray counting by 1
         For index = 0 To planeArray.Count - 1 Step 1
             Dim localAirplane As Airplane = planeArray(index)
             If localAirplane.model.Contains(input) Then
@@ -228,11 +246,13 @@ Public Class frmAirplaneData
             End If
         Next
 
+        ' If there are no planes of this type.
         If Not valid Then
             MessageBox.Show(“There is No known ” & input & “ Airplane Model”)
             Return
         End If
 
+        ' Grabs amount of this plane.
         Dim planeCount As Integer = NumberOfPlane(input)
         Dim avgSeats As Double = 0D
         Dim sector As Integer = 0
@@ -240,6 +260,7 @@ Public Class frmAirplaneData
         Dim fuelPerSeat As Double = 0D
         Dim totalRoundTrip As Integer = 0
 
+        ' Loops through all lines of plane object (structure) array planeArray counting by 1
         For index = 0 To planeArray.Count - 1 Step 1
             Dim localAirplane As Airplane = planeArray(index)
 
@@ -253,17 +274,19 @@ Public Class frmAirplaneData
             End If
         Next
 
+        ' Averages out all values by using CalculateAverages
         avgSeats = CalculateAverages(avgSeats, planeCount)
         sector = CalculateAverages(sector, planeCount)
         fuelBurn = CalculateAverages(fuelBurn, planeCount)
         fuelPerSeat = CalculateAverages(fuelPerSeat, planeCount)
 
+        ' Updates all values to label texts, and adds commas if needed.
         lblAirplaneModel.Text = input
         lblNumberOfSeats.Text = CStr(avgSeats)
         lblSector.Text = sector.ToString("N0")
         lblFuelBurn.Text = Math.Round(fuelBurn, 1)
-        lblFuelPerSeat.Text = CStr(fuelPerSeat).TrimEnd()
-        lblRoundTripFuel.Text = totalRoundTrip.ToString("N0").TrimEnd()
+        lblFuelPerSeat.Text = CStr(fuelPerSeat)
+        lblRoundTripFuel.Text = totalRoundTrip.ToString("N0")
 
     End Sub
 End Class
