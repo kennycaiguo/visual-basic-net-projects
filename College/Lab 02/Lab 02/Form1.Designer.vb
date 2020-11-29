@@ -57,7 +57,7 @@ Partial Class frmAirplaneData
         Me.dataGridFuel.Location = New System.Drawing.Point(13, 36)
         Me.dataGridFuel.Name = "dataGridFuel"
         Me.dataGridFuel.ReadOnly = True
-        Me.dataGridFuel.Size = New System.Drawing.Size(203, 212)
+        Me.dataGridFuel.Size = New System.Drawing.Size(203, 190)
         Me.dataGridFuel.TabIndex = 1
         '
         'btnAirplaneDetails
@@ -128,7 +128,7 @@ Partial Class frmAirplaneData
         Me.lblAirplaneModel.Location = New System.Drawing.Point(338, 73)
         Me.lblAirplaneModel.Name = "lblAirplaneModel"
         Me.lblAirplaneModel.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.lblAirplaneModel.Size = New System.Drawing.Size(105, 13)
+        Me.lblAirplaneModel.Size = New System.Drawing.Size(99, 13)
         Me.lblAirplaneModel.TabIndex = 9
         '
         'lblNumberOfSeats
@@ -136,7 +136,7 @@ Partial Class frmAirplaneData
         Me.lblNumberOfSeats.Location = New System.Drawing.Point(338, 97)
         Me.lblNumberOfSeats.Name = "lblNumberOfSeats"
         Me.lblNumberOfSeats.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.lblNumberOfSeats.Size = New System.Drawing.Size(102, 13)
+        Me.lblNumberOfSeats.Size = New System.Drawing.Size(99, 13)
         Me.lblNumberOfSeats.TabIndex = 10
         '
         'lblSector
@@ -144,7 +144,7 @@ Partial Class frmAirplaneData
         Me.lblSector.Location = New System.Drawing.Point(338, 121)
         Me.lblSector.Name = "lblSector"
         Me.lblSector.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.lblSector.Size = New System.Drawing.Size(102, 13)
+        Me.lblSector.Size = New System.Drawing.Size(99, 13)
         Me.lblSector.TabIndex = 11
         '
         'lblFuelBurn
@@ -152,7 +152,7 @@ Partial Class frmAirplaneData
         Me.lblFuelBurn.Location = New System.Drawing.Point(338, 146)
         Me.lblFuelBurn.Name = "lblFuelBurn"
         Me.lblFuelBurn.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.lblFuelBurn.Size = New System.Drawing.Size(102, 13)
+        Me.lblFuelBurn.Size = New System.Drawing.Size(99, 13)
         Me.lblFuelBurn.TabIndex = 12
         '
         'lblFuelPerSeat
@@ -160,22 +160,22 @@ Partial Class frmAirplaneData
         Me.lblFuelPerSeat.Location = New System.Drawing.Point(338, 171)
         Me.lblFuelPerSeat.Name = "lblFuelPerSeat"
         Me.lblFuelPerSeat.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.lblFuelPerSeat.Size = New System.Drawing.Size(102, 13)
+        Me.lblFuelPerSeat.Size = New System.Drawing.Size(99, 13)
         Me.lblFuelPerSeat.TabIndex = 13
         '
         'lblRoundTripFuel
         '
-        Me.lblRoundTripFuel.Location = New System.Drawing.Point(338, 193)
+        Me.lblRoundTripFuel.Location = New System.Drawing.Point(341, 193)
         Me.lblRoundTripFuel.Name = "lblRoundTripFuel"
         Me.lblRoundTripFuel.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.lblRoundTripFuel.Size = New System.Drawing.Size(102, 13)
+        Me.lblRoundTripFuel.Size = New System.Drawing.Size(96, 13)
         Me.lblRoundTripFuel.TabIndex = 14
         '
         'frmAirplaneData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(455, 257)
+        Me.ClientSize = New System.Drawing.Size(455, 234)
         Me.Controls.Add(Me.lblRoundTripFuel)
         Me.Controls.Add(Me.lblFuelPerSeat)
         Me.Controls.Add(Me.lblFuelBurn)

@@ -85,15 +85,24 @@ Public Class frmAirplaneData
 
     ' Updates chart displaying models with fuel per gallon/seat
     Sub DisplayComputeFuel()
+
+        ' Creates empty array of Airplane objects (structures)
         Dim planeArray As Airplane() = {}
+        ' Creates array with each line from text file Airplane.
         Dim planeDataArray As String() = IO.File.ReadAllLines("Airplane.txt")
 
+        ' Resizes empty array to size of planeDataArray.
         Array.Resize(planeArray, planeDataArray.Length)
 
+        ' Loops through all lines of empty array planeArray counting by 1
         For index = 0 To planeArray.Count - 1 Step 1
+            ' Creates a localized local Airplane object (structure)
             Dim localAirplane As New Airplane
+
+            ' Splits airplane data on index line of planeDataArray by a comma.
             Dim planeStr() As String = planeDataArray(index).Split(",")
 
+            ' Grabs data that is split into file.
             localAirplane.model = planeStr(0)
             localAirplane.firstFlightYear = CInt(planeStr(1))
             localAirplane.seatCount = CInt(planeStr(2))
@@ -101,59 +110,97 @@ Public Class frmAirplaneData
             localAirplane.fuelBurnRate = CDbl(planeStr(4))
             localAirplane.fuelPerSeat = CDbl(planeStr(5))
 
+            ' Updates object at index in planeArray to localized local Airplane object (structure) that has data.
             planeArray(index) = localAirplane
         Next
 
+        ' Creates plane dictionary keeping count of fuel per seat for a type of plane combined.
         Dim planeDictionary As New Dictionary(Of String, Double)
+
+        ' Creates plane dictionary keeping count of a specific plane.
         Dim planeAmountDictionary As New Dictionary(Of String, Integer)
 
+        ' Loops through all lines of plane object (structure) array planeArray counting by 1
         For index = 0 To planeArray.Count - 1 Step 1
+            ' Creates a localized variable of plane object in planeArray at index line.
             Dim localPlane As Airplane = planeArray(index)
-            Dim name As String = localPlane.model.Split("-")(0)
 
+            ' Splits name of localPlane model by a dash to get the model number.
+            Dim name As String = localPlane.model.Split("-")(0).Substring(0, 4)
+
+            ' Checks if the name exists in the dictionary yet.
             If planeDictionary.ContainsKey(name) Then
+                ' If it is in the dictionary, grab current fuel and add fuel per seat from localPlane
                 Dim currentFuel As Double = planeDictionary.Item(name) + localPlane.fuelPerSeat
+
+                ' Increases plane count by 1.
                 Dim planeCount As Integer = planeAmountDictionary.Item(name) + 1
 
+                ' Update dictionaries of plane with new fuel and count data.
                 planeDictionary.Item(name) = currentFuel
                 planeAmountDictionary.Item(name) = planeCount
 
+                ' Continues for loop and skips the adding of the plane to dictionary and reseting data.
                 Continue For
             End If
 
+            ' Adds plane to dictionary with it's fuel per seat.
             planeDictionary.Add(name, localPlane.fuelPerSeat)
+
+            ' Adds plane amount to dictionary set to 1.
             planeAmountDictionary.Add(name, 1)
         Next
 
+        ' 1. Loops through all plane names in planeDictionary.
+        ' 2. Calculates the average fuel per seat of each plane by dividing their fuel from planeDictionary and the amount of plane.
+        ' 3. Orders planes corresponding to the fuelPerSeat in descending order.
+        ' 4. Selects what data we want grabbed for dataGridFuel.
         Dim query = From planeName As String In planeDictionary.Keys.ToList
                     Let fuelPerSeat = CalculateAverages(planeDictionary.Item(planeName), planeAmountDictionary.Item(planeName))
                     Order By fuelPerSeat Descending
                     Select planeName, fuelPerSeat
 
+        ' Resets data source of chart if previously used.
         dataGridFuel.DataSource = Nothing
+
+        ' Clears rows of data.
         dataGridFuel.Rows.Clear()
 
+        ' Sets row headers to be disabled.
         dataGridFuel.RowHeadersVisible = False
 
+        ' Updates data source to new query as a list.
         dataGridFuel.DataSource = query.ToList
+
+        ' Sets currentCell to Nothing
         dataGridFuel.CurrentCell = Nothing
 
-        dataGridFuel.Columns(0).HeaderText = "Model"
+        ' Updates column names to the corresponding ones from Lab 02.pdf.
+        dataGridFuel.Columns("planeName").HeaderText = "Model"
         dataGridFuel.Columns("fuelPerSeat").HeaderText = "Fuel per gallon/seat"
 
     End Sub
 
     ' Updates airplane details displayed from entering a model.
     Sub DisplayAirplaneDetails()
+
+        ' Creates empty array of Airplane objects (structures)
         Dim planeArray As Airplane() = {}
+        ' Creates array with each line from text file Airplane.
         Dim planeDataArray As String() = IO.File.ReadAllLines("Airplane.txt")
 
+        ' Resizes empty array to size of planeDataArray.
         Array.Resize(planeArray, planeDataArray.Length)
 
+        ' Loops through all lines of empty array planeArray counting by 1
         For index = 0 To planeArray.Count - 1 Step 1
+            ' Creates a localized local Airplane object (structure)
             Dim localAirplane As New Airplane
+
+            ' Splits airplane data on index line of planeDataArray by a comma.
             Dim planeStr() As String = planeDataArray(index).Split(",")
 
+            ' Grabs data that is split into file.
             localAirplane.model = planeStr(0)
             localAirplane.firstFlightYear = CInt(planeStr(1))
             localAirplane.seatCount = CInt(planeStr(2))
@@ -161,6 +208,7 @@ Public Class frmAirplaneData
             localAirplane.fuelBurnRate = CDbl(planeStr(4))
             localAirplane.fuelPerSeat = CDbl(planeStr(5))
 
+            ' Updates object at index in planeArray to localized local Airplane object (structure) that has data.
             planeArray(index) = localAirplane
         Next
 
@@ -195,7 +243,8 @@ Public Class frmAirplaneData
         For index = 0 To planeArray.Count - 1 Step 1
             Dim localAirplane As Airplane = planeArray(index)
 
-            If localAirplane.model.Contains(input) Then
+            If localAirplane.model.StartsWith(input) Then
+                Console.WriteLine(localAirplane.model)
                 avgSeats += localAirplane.seatCount
                 sector += localAirplane.sector
                 fuelBurn += localAirplane.fuelBurnRate
@@ -213,8 +262,8 @@ Public Class frmAirplaneData
         lblNumberOfSeats.Text = CStr(avgSeats)
         lblSector.Text = sector.ToString("N0")
         lblFuelBurn.Text = Math.Round(fuelBurn, 1)
-        lblFuelPerSeat.Text = CStr(fuelPerSeat)
-        lblRoundTripFuel.Text = totalRoundTrip.ToString("N0")
+        lblFuelPerSeat.Text = CStr(fuelPerSeat).TrimEnd()
+        lblRoundTripFuel.Text = totalRoundTrip.ToString("N0").TrimEnd()
 
     End Sub
 End Class
