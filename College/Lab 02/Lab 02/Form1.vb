@@ -283,7 +283,7 @@ Public Class frmAirplaneData
         lblAirplaneModel.Text = input
         lblNumberOfSeats.Text = CStr(avgSeats)
         lblSector.Text = sector.ToString("N0")
-        lblFuelBurn.Text = Math.Round(fuelBurn, 1)
+        lblFuelBurn.Text = CStr(fuelBurn)
         lblFuelPerSeat.Text = CStr(fuelPerSeat)
         lblRoundTripFuel.Text = totalRoundTrip.ToString("N0")
 
