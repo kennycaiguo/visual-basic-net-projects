@@ -22,29 +22,29 @@ Partial Class frmCowboys
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.btnCreateFile = New System.Windows.Forms.Button()
+        Me.btnUpdateFile = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
-        'btnCreateFile
+        'btnUpdateFile
         '
-        Me.btnCreateFile.Location = New System.Drawing.Point(100, 80)
-        Me.btnCreateFile.Name = "btnCreateFile"
-        Me.btnCreateFile.Size = New System.Drawing.Size(98, 41)
-        Me.btnCreateFile.TabIndex = 0
-        Me.btnCreateFile.Text = "Create File"
-        Me.btnCreateFile.UseVisualStyleBackColor = True
+        Me.btnUpdateFile.Location = New System.Drawing.Point(100, 80)
+        Me.btnUpdateFile.Name = "btnUpdateFile"
+        Me.btnUpdateFile.Size = New System.Drawing.Size(98, 41)
+        Me.btnUpdateFile.TabIndex = 0
+        Me.btnUpdateFile.Text = "Update File"
+        Me.btnUpdateFile.UseVisualStyleBackColor = True
         '
         'frmCowboys
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(307, 205)
-        Me.Controls.Add(Me.btnCreateFile)
+        Me.Controls.Add(Me.btnUpdateFile)
         Me.Name = "frmCowboys"
         Me.Text = "Cowboys"
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents btnCreateFile As Button
+    Friend WithEvents btnUpdateFile As Button
 End Class
