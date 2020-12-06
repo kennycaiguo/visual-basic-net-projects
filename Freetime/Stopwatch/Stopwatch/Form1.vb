@@ -16,6 +16,7 @@
 
 Public Class frmStopwatch
     Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
+        txtBoxSeconds.Text = "0" ' Resets watch
         timerClock.Enabled = True
     End Sub
 
@@ -24,9 +25,6 @@ Public Class frmStopwatch
     End Sub
 
     Private Sub timerClock_Tick(sender As Object, e As EventArgs) Handles timerClock.Tick
-        If txtBoxSeconds.Text = "" Then
-            txtBoxSeconds.Text = "1"
-        End If
-        txtBoxSeconds.Text = CStr(CInt(txtBoxSeconds.Text) + 1)
+        txtBoxSeconds.Text = (CDbl(txtBoxSeconds.Text) + 0.1).ToString("N1")
     End Sub
 End Class

@@ -68,7 +68,6 @@ Partial Class frmStopwatch
         '
         'timerClock
         '
-        Me.timerClock.Interval = 1000
         '
         'frmStopwatch
         '
