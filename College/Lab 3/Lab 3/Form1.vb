@@ -488,6 +488,7 @@ Public Class frmAirline
 
     ' Fires when a destination city has been selected by the passenger.
     Private Sub listBoxDestination_SelectedIndexChanged(sender As Object, e As EventArgs) Handles listBoxDestination.SelectedIndexChanged
+        ' Checks if a city has been selected and if there is only one destination.
         If Not listBoxDestination.SelectedIndex = -1 AndAlso Not listBoxDestination.Items.Count = 1 Then
 
             ' Disables radio buttons for changing if trip is one way or round trip for false information.
@@ -512,8 +513,10 @@ Public Class frmAirline
             ' Update the destination in the reserveration stats.
             lblDestination.Text = "Destination: " & destination
         ElseIf listBoxDestination.Items.Count = 1 Then
+            ' Shows flights that are from origin to destination.
             showFlights()
 
+            ' Updates the destination text to th destination from list box.
             lblDestination.Text = "Destination: " & listBoxDestination.SelectedItem
         End If
     End Sub
