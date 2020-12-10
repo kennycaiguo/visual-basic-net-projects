@@ -46,6 +46,7 @@ Partial Class frmAirline
         Me.rButtonOneWay = New System.Windows.Forms.RadioButton()
         Me.lblPNR = New System.Windows.Forms.Label()
         Me.groupBoxReservationStatus = New System.Windows.Forms.GroupBox()
+        Me.btnClearStatus = New System.Windows.Forms.Button()
         Me.lblTotalCost = New System.Windows.Forms.Label()
         Me.lblSeatCount = New System.Windows.Forms.Label()
         Me.lblDestination = New System.Windows.Forms.Label()
@@ -65,7 +66,6 @@ Partial Class frmAirline
         Me.lblManagementOrigin = New System.Windows.Forms.Label()
         Me.lblManagementPNR = New System.Windows.Forms.Label()
         Me.timerSystem = New System.Windows.Forms.Timer(Me.components)
-        Me.btnClearStatus = New System.Windows.Forms.Button()
         Me.groupBoxReservation.SuspendLayout()
         Me.groupBoxReservationStatus.SuspendLayout()
         Me.groupBoxReservationLookup.SuspendLayout()
@@ -299,6 +299,15 @@ Partial Class frmAirline
         Me.groupBoxReservationStatus.TabStop = False
         Me.groupBoxReservationStatus.Text = "Reservation Status"
         '
+        'btnClearStatus
+        '
+        Me.btnClearStatus.Location = New System.Drawing.Point(93, 132)
+        Me.btnClearStatus.Name = "btnClearStatus"
+        Me.btnClearStatus.Size = New System.Drawing.Size(75, 23)
+        Me.btnClearStatus.TabIndex = 5
+        Me.btnClearStatus.Text = "Clear"
+        Me.btnClearStatus.UseVisualStyleBackColor = True
+        '
         'lblTotalCost
         '
         Me.lblTotalCost.AutoSize = True
@@ -484,15 +493,6 @@ Partial Class frmAirline
         'timerSystem
         '
         Me.timerSystem.Enabled = True
-        '
-        'btnClearStatus
-        '
-        Me.btnClearStatus.Location = New System.Drawing.Point(93, 132)
-        Me.btnClearStatus.Name = "btnClearStatus"
-        Me.btnClearStatus.Size = New System.Drawing.Size(75, 23)
-        Me.btnClearStatus.TabIndex = 5
-        Me.btnClearStatus.Text = "Clear"
-        Me.btnClearStatus.UseVisualStyleBackColor = True
         '
         'frmAirline
         '
