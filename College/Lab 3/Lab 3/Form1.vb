@@ -188,6 +188,7 @@ Public Class frmAirline
     End Sub
 
     Private Sub displayReserveration()
+
         Dim passengerName As String = ""
         Dim passengerNameSplit As String() = txtBoxPassengerName.Text.Split(" ")
 
@@ -210,14 +211,12 @@ Public Class frmAirline
 
         format += passengerName & ":" & pnr & "#:" & origin & "," & destination & ";" & seatCount & ":" & totalCost
 
-        listBoxDestination.ClearSelected()
-        listBoxOrigin.ClearSelected()
-
         listBoxOrigin.Items.Clear()
         listBoxDestination.Items.Clear()
-        showOriginFlights()
 
         flightCache = Nothing
+
+        showOriginFlights()
 
         lblTime.Text = ""
         lblFare.Text = ""
@@ -246,6 +245,32 @@ Public Class frmAirline
         btnInfoSelect.Visible = True
     End Sub
 
+    Private Sub restartProcess()
+        listBoxOrigin.Items.Clear()
+        listBoxDestination.Items.Clear()
+
+        flightCache = Nothing
+
+        showOriginFlights()
+
+        lblTime.Text = ""
+        lblFare.Text = ""
+
+        clearReservationStatus()
+
+        lblPNR.Text = "PNR: "
+
+        lblOrigin.Text = "Origin: None"
+        lblDestination.Text = "Destination: None"
+        lblTotalCost.Text = "Total Cost: $0.00"
+
+        resetSelection()
+
+        rButtonOneWay.Visible = True
+        rButtonOneWay.Checked = True
+        rButtonRoundTrip.Visible = True
+    End Sub
+
     ' Updates flightCache for selecting what flight for passenger, and updates index.
     Private Sub showFlights()
         ' Sets index to 0 to prevent out of bounds array issues.
@@ -261,13 +286,11 @@ Public Class frmAirline
         flightCache = destinationQuery.ToList.ToArray
 
         Dim line As String = flightCache(index)
-        Dim linesplit As String() = line.Split(",")
+            Dim linesplit As String() = line.Split(",")
 
-        lblTime.Text = linesplit(2)
+            lblTime.Text = linesplit(2)
 
         updateFare(linesplit(3), linesplit(4))
-
-        Console.WriteLine("got here?")
     End Sub
 
     ' Lists all destination flights that are coming from origin.
@@ -321,63 +344,67 @@ Public Class frmAirline
     ' Fires when a origin city has been selected by the passenger.
     Private Sub listBoxOrigin_SelectedIndexChanged(sender As Object, e As EventArgs) Handles listBoxOrigin.SelectedIndexChanged
         If Not listBoxOrigin.SelectedIndex = -1 AndAlso Not listBoxOrigin.Items.Count = 1 Then
+
+            ' Grabs origin from list box.
             Dim origin As String = listBoxOrigin.SelectedItem
 
+            ' Clears list box.
             listBoxOrigin.Items.Clear()
 
+            ' Adds origin back to list box.
             listBoxOrigin.Items.Add(origin)
 
             listBoxOrigin.SetSelected(0, True)
-
+            ' Shows flights for destination going from location origin.
             showToFlights()
 
+            ' Sets button restart to not visible. 
             btnRestart.Visible = True
 
+            ' Update the origin in the reservation stats.
             lblOrigin.Text = "Origin: " & origin
+
         End If
     End Sub
 
     ' Fires when a destination city has been selected by the passenger.
     Private Sub listBoxDestination_SelectedIndexChanged(sender As Object, e As EventArgs) Handles listBoxDestination.SelectedIndexChanged
         If Not listBoxDestination.SelectedIndex = -1 AndAlso Not listBoxDestination.Items.Count = 1 Then
+
+            ' Disables radio buttons for changing if trip is one way or round trip for false information.
+            rButtonOneWay.Visible = False
+            rButtonRoundTrip.Visible = False
+
+            ' Grabs destination from list box.
             Dim destination As String = listBoxDestination.SelectedItem
 
+            ' Clars list box.
             listBoxDestination.Items.Clear()
 
+            ' Adds destination back to list box.
             listBoxDestination.Items.Add(destination)
 
+            ' Sets destination as selected.
             listBoxDestination.SetSelected(0, True)
 
+            ' List flights that are from those two locations with the time and fare price.
             showFlights()
 
+            ' Update the destination in the reserveration stats.
             lblDestination.Text = "Destination: " & destination
+        ElseIf listBoxDestination.Items.Count = 1 Then
+            showFlights()
+
+            lblDestination.Text = "Destination: " & listBoxDestination.SelectedItem
         End If
     End Sub
 
+    ' When button is clicked will restart the entire reserve process.
     Private Sub btnRestart_Click(sender As Object, e As EventArgs) Handles btnRestart.Click
-        listBoxDestination.ClearSelected()
-        listBoxOrigin.ClearSelected()
-
-        listBoxOrigin.Items.Clear()
-        listBoxDestination.Items.Clear()
-        showOriginFlights()
-
-        flightCache = Nothing
-
-        lblTime.Text = ""
-        lblFare.Text = ""
-
-        clearReservationStatus()
-
-        lblPNR.Text = "PNR: "
-
-        lblOrigin.Text = "Origin: None"
-        lblDestination.Text = "Destination: None"
-        lblTotalCost.Text = "Total Cost: $0.00"
-
-        resetSelection()
+        restartProcess()
     End Sub
 
+    ' Checks if a flight is selected before updating to another one.
     Private Sub btnInfoSelect_Click(sender As Object, e As EventArgs) Handles btnInfoSelect.Click
         checkFareSelection()
     End Sub
