@@ -88,6 +88,7 @@ Public Class frmAirline
             Return True
         End If
 
+        ' Returns false if the last name and passenger name record id couldn't be found.
         Return False
     End Function
 
@@ -479,53 +480,79 @@ Public Class frmAirline
         checkFareSelection()
     End Sub
 
+    ' Allows passenger to skip onto the next flight if there are multiple for the origin to destination.
     Private Sub btnInfoNext_Click(sender As Object, e As EventArgs) Handles btnInfoNext.Click
+        ' Chewcks if the fare is empty, and checks if a time is provided.
         If fare = "" AndAlso Not lblTime.Text = "" Then
+            ' Checks if the index value + 1 is less than the flight cache length.
             If index + 1 < flightCache.Length - 1 Then
+                ' Increases index by 1
                 index += 1
             Else
+                ' Sets index to 0 to restart flight cache at the beginning.
                 index = 0
             End If
 
+            ' Grabs the specific line in the flight cache for the flight.
             Dim line As String = flightCache(index)
+
+            ' Splits the line information by the commas.
             Dim linesplit As String() = line.Split(",")
 
+            ' Grabs the time for the flight from the array.
             lblTime.Text = linesplit(2)
 
+            ' Grabs the one way price, and grabs the discount price for round trip.
             updateFare(linesplit(3), linesplit(4))
         End If
     End Sub
 
+    ' Fires when a passenger would like to clear the currently selected flight.
     Private Sub btnInfoClear_Click(sender As Object, e As EventArgs) Handles btnInfoClear.Click
+        ' Fires sub method to clear flight information from selected flight to allow change.
         clearInformation()
     End Sub
 
+    ' Fires when a  passenger would like to reserve flight for the information that they selected.
     Private Sub btnReserve_Click(sender As Object, e As EventArgs) Handles btnReserve.Click
+        ' Checks if a flight is selected, checks if the passenger name was provided, checks if the seat count was provided and if the seat count is a valid number.
         If Not fare = "" AndAlso Not txtBoxPassengerName.Text = "" AndAlso Not txtBoxSeatCount.Text = "" AndAlso IsNumeric(txtBoxSeatCount.Text) Then
+            ' Fires sub method to display reserveration.
             displayReserveration()
         End If
     End Sub
 
+    ' Fires when a passenger would like to look up their information.
     Private Sub btnRetrieve_Click(sender As Object, e As EventArgs) Handles btnRetrieve.Click
+        ' Checks if the passenger name record is valid.
         If IsPNRValid() Then
+            ' If the passenger name record is valid, it'll show the reservation management for that specific flight.
             showReservation()
         Else
+            ' Shows a message box explaining that at least one of the two text boxes do not contain the correct information.
             MessageBox.Show("We're sorry, but your last name or passenger name record is invalid", "RCSJ Airline Inc.")
         End If
     End Sub
 
+    ' Deletes the reservation data that is stored.
     Private Sub btnCReserv_Click(sender As Object, e As EventArgs) Handles btnCReserv.Click
         deleteReservation()
     End Sub
 
-    ' 
+    ' Fires when a passenger would like to add special comments to their flight.
     Private Sub btnACom_Click(sender As Object, e As EventArgs) Handles btnACom.Click
+        ' Asks the passenger what they'd like to be added as a special comment to their flight management information on file.
         Dim input As String = GetInput()
 
+        ' Checks if the input they entered is empty.
         If Not input = "" Then
-            addComment(input)
+            ' Shows message that the comment was successfully added into the file.
             MessageBox.Show("Added comment: " & input, "RCSJ Airline Inc.")
+
+            ' Executes method that would add comment into file.
+            addComment(input)
         Else
+            ' Shows a message stating that if someone would like a comment to be shown they'll need to provide what will be shown.
             MessageBox.Show("You must add information to your special comment in order for it to be added", "RCSJ Airline Inc.")
         End If
     End Sub
@@ -577,6 +604,7 @@ Public Class frmAirline
                 txtBoxSeatCount.Text = "287"
             End If
         Else
+            ' Sets the cost of flight to nothing.
             lblCost.Text = "$0.00"
         End If
 
@@ -587,6 +615,7 @@ Public Class frmAirline
     ' Checks if a passenger name record is filled, before clearing the resevation status.
     Private Sub btnClearStatus_Click(sender As Object, e As EventArgs) Handles btnClearStatus.Click
         If Not lblPNR.Text = "PNR: " Then
+            ' Clears the reservation status to make sure another passenger wouldn't see it.
             clearReservationStatus()
         End If
     End Sub
