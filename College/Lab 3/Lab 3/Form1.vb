@@ -16,45 +16,64 @@
 
 Public Class frmAirline
 
+    ' Used for what flight is selected.
     Public Shared fare As String = ""
+
+    ' Flight cache for origin to destination.
     Public Shared flightCache() As String
+
+    ' Index for what flight is currently selected.
     Public Shared index As Integer = 0
-    Public Shared cachedCities As Integer() = {-1, -1}
+
+    ' Used to keep who is currently in the reservation management.
     Public Shared reservation As String
 
     ' Loads origin flights on startup of application
     Private Sub frmLoad(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Shows the origin flight city names in list box origin.
         showOriginFlights()
 
+        ' Checks if reservation file exists.
         If Not IO.File.Exists("reservations.txt") Then
+            ' Creates empty reservations file if it doesn't exist.
             IO.File.Create("reservations.txt")
         End If
     End Sub
 
+    ' Generates passenger name record id.
     Function generatePNR() As String
+        ' Grabs the file length of reservations and increases it by one.
         Dim idNumber As String = CStr(grabResFile().Length + 1)
 
+        ' Adds one to the starting value as 0 would've made it sound like it is unpopular.
         Return 100 + idNumber
     End Function
 
     ' Grabs air fare file.
     Function grabAirfareFile() As String()
+        ' Reads all lines of Airfare.txt
         Return IO.File.ReadAllLines("Airfare.txt")
     End Function
 
     ' Grabs reservations file.
     Function grabResFile() As String()
+        ' Reads all lines of reservations.txt
         Return IO.File.ReadAllLines("reservations.txt")
     End Function
 
+    ' Function to ask for input of what the user would like to be added to their flight management as a comment.
     Function GetInput() As String
         Return InputBox("Enter special comments to be added.", "RCSJ Airline Inc.", "")
     End Function
 
+    ' Checks if the passenger name record id is valid inside of the file.
     Function IsPNRValid() As Boolean
 
+        ' Grabs the reservation file.
         Dim resFile As String() = grabResFile()
 
+        ' Creates a query that loops through all liens and skips the lines that have the word None, and will then split the line by colons to grab the passenger's last name and check if it is equal to the one in lookup name,
+        ' and finally will split by a hash tag and check if the stuff grabbed is the id from the line.
         Dim lookupQuery = From localLine As String In resFile
                           Where Not localLine.Equals("None")
                           Let localLineSplit As String() = localLine.Split(":")
@@ -62,7 +81,9 @@ Public Class frmAirline
                           Where localLineSplit(1).Split("#")(0).Equals(txtBoxLookupPNR.Text)
                           Select localLine
 
+        ' Checks if the query found one that matched the request.
         If (lookupQuery.Count = 1) Then
+            ' Updates the reservation cache to what was grabbed from the file.
             reservation = lookupQuery.ToList.ToArray()(0)
             Return True
         End If
@@ -70,9 +91,13 @@ Public Class frmAirline
         Return False
     End Function
 
+    ' Called when a user wants to add a comment to their flight management file.
     Private Sub addComment(ByRef comment)
+
+        ' Grabs the reservation file.
         Dim resFile As String() = grabResFile()
 
+        ' Splits information from reservation format to grab specific information stored.
         Dim localLineSplit As String() = reservation.Split(":")
         Dim cities As String() = localLineSplit(2).Split(";")
         Dim cityNames As String() = cities(0).Split(",")
@@ -89,16 +114,16 @@ Public Class frmAirline
 
         Dim comments As String() = secondSplit(1).Split(",")
 
-        For index As Integer = 0 To comments.Length - 1 Step 1
-            Console.WriteLine(comments(index))
-        Next
-
+        ' Splits the comments into a array spaced by spaces.
         Dim commentsToBeAdded As String() = comment.Split(" ")
 
+        ' Connects previously comments with the new comments added and converts to a list.
         Dim newComments As String() = comments.Concat(commentsToBeAdded).ToArray()
 
+        ' Creates a format for the new information that will be utilized.
         Dim format As String = lastName & ":" & PNR & "#" & String.Join(",", newComments) & ":" & origin & "," & destination & ";" & seatCount & ":" & cost
 
+        ' Loops through the file and checks for reservation and will update the reservation.
         For index As Integer = 0 To resFile.Length - 1 Step 1
             If (resFile(index).Equals(reservation)) Then
                 resFile(index) = format
@@ -106,8 +131,10 @@ Public Class frmAirline
             End If
         Next
 
+        ' Updates resservation cache to new format into memory.
         reservation = format
 
+        ' Writes information to the file.
         IO.File.WriteAllLines("reservations.txt", resFile)
     End Sub
 
@@ -170,9 +197,13 @@ Public Class frmAirline
         txtBoxLookupPNR.Text = ""
     End Sub
 
+    ' Deletes reservation from file.
     Private Sub deleteReservation()
+        ' Grabs file's data int ostring array.
         Dim resFile As String() = grabResFile()
 
+        ' Loops through string array and checks if the grabbed index of the string array is the reservation.
+        ' If it is, set it to None, and quit the for loop.
         For index As Integer = 0 To resFile.Length - 1 Step 1
             If (resFile(index).Equals(reservation)) Then
                 resFile(index) = "None"
@@ -180,42 +211,61 @@ Public Class frmAirline
             End If
         Next
 
+        ' Sets reservation to empty.
         reservation = ""
 
+        ' Clears the reservation that is displayed.
         clearDisplayReservation()
+
+        ' Writes changes to file.
 
         IO.File.WriteAllLines("reservations.txt", resFile)
     End Sub
 
+    ' Displays the reservation after provided last name and pnr.
     Private Sub displayReserveration()
 
         Dim passengerName As String = ""
         Dim passengerNameSplit As String() = txtBoxPassengerName.Text.Split(" ")
 
+        ' Checks if passenger name has a last name.
         If passengerNameSplit.Length > 1 Then
-            passengerName = passengerNameSplit(1)
+            ' Updates passengerName to last name.
+            passengerName = passengerNameSplit(passengerNameSplit.Length - 1)
         Else
             MessageBox.Show("You need to provide a last name in your name.", "RCSJ Airline Inc.")
             Return
         End If
 
+        ' Generates a random passenger name record.
         Dim pnr As String = generatePNR()
+
+        ' Grabs origin city from list box origin
         Dim origin As String = listBoxOrigin.SelectedItem
+
+        ' Grabs destination city from list box destination.
         Dim destination As String = listBoxDestination.SelectedItem
+
+        ' Converts text box seat count to a integer.
         Dim seatCount As Integer = CInt(txtBoxSeatCount.Text)
+
+        ' Converts label cost to a double and back into a string.
         Dim totalCost As String = CStr(CDbl(lblCost.Text))
 
+        ' Updates label's text for passenger name record with the generated passenger name record number.
         lblPNR.Text = "PNR: " & pnr
 
-        Dim format As String = ""
+        ' Creates format for file to be storing data.
+        Dim format As String = passengerName & ":" & pnr & "#:" & origin & "," & destination & ";" & seatCount & ":" & totalCost
 
-        format += passengerName & ":" & pnr & "#:" & origin & "," & destination & ";" & seatCount & ":" & totalCost
-
+        ' Clears the list boxes.
         listBoxOrigin.Items.Clear()
         listBoxDestination.Items.Clear()
 
+        ' Empties the flight cache.
         flightCache = Nothing
 
+        ' Adds origin flights 
         showOriginFlights()
 
         lblTime.Text = ""
@@ -245,12 +295,16 @@ Public Class frmAirline
         btnInfoSelect.Visible = True
     End Sub
 
+    ' Restarts the process of airline.
     Private Sub restartProcess()
+        ' Clears cities from both list boxes.
         listBoxOrigin.Items.Clear()
         listBoxDestination.Items.Clear()
 
+        ' Empties flight cache.
         flightCache = Nothing
 
+        ' 
         showOriginFlights()
 
         lblTime.Text = ""
@@ -295,37 +349,52 @@ Public Class frmAirline
 
     ' Lists all destination flights that are coming from origin.
     Private Sub showToFlights()
+
+        ' Grabs the airfare file's individual lines.
         Dim airfareFile As String() = grabAirfareFile()
 
+        ' Creates a query that grabs all of the destination flight names that have a origin name of what is selected from the list box.
         Dim destinationQuery = From line As String In airfareFile
                                Let lineSplit As String() = line.Split(",")
                                Where lineSplit(0) = listBoxOrigin.SelectedItem
                                Select lineSplit(1)
 
+        ' Converts query into a list, and removes any duplicates, before turning back into a list.
         Dim destinationArray As String() = destinationQuery.ToList.Distinct.ToArray
 
+        ' Clears list box.
         listBoxDestination.Items.Clear()
 
+        ' Adds all items from destination array into destination list box.
         For index As Integer = 0 To destinationArray.Length - 1 Step 1
             listBoxDestination.Items.Add(destinationArray(index))
         Next
     End Sub
 
+    ' Adds the origin flights to the list box to choose from.
     Private Sub showOriginFlights()
+
+        ' Grabs the airfare file's individual lines.
         Dim airfareFile As String() = grabAirfareFile()
+
+        ' Creates a query that grabs all the origin names from the beginning of each line.
         Dim originQuery = From line As String In airfareFile
                           Let lineSplit As String() = line.Split(",")
                           Select lineSplit(0)
 
+        ' Converts query into a list, and removes any duplicates, before turning back into a list.
         Dim originArray As String() = originQuery.ToList.Distinct.ToArray
 
+        ' Clears list box.
         listBoxOrigin.Items.Clear()
 
+        ' Adds all items from origin array into origin list box.
         For index As Integer = 0 To originArray.Length - 1 Step 1
             listBoxOrigin.Items.Add(originArray(index))
         Next
     End Sub
 
+    ' Updates the fare pricing dependent if round trip is selected.
     Private Sub updateFare(ByRef cost As String, ByRef discount As String)
         Dim fare As Double = CDbl(cost)
 
@@ -338,6 +407,7 @@ Public Class frmAirline
             fare = (fare * (1 - CDbl(discount) / 100))
         End If
 
+        ' Converts to string and adds currency symbol based on system settings.
         lblFare.Text = fare.ToString("c2")
     End Sub
 
@@ -448,6 +518,7 @@ Public Class frmAirline
         deleteReservation()
     End Sub
 
+    ' 
     Private Sub btnACom_Click(sender As Object, e As EventArgs) Handles btnACom.Click
         Dim input As String = GetInput()
 
@@ -459,46 +530,61 @@ Public Class frmAirline
         End If
     End Sub
 
+    ' Updates the reservation cache of the user selected to nothing, and clears what is displayed in the reservation management.
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
         reservation = ""
         clearDisplayReservation()
     End Sub
 
+    ' A timer that runs every 100 milliseconds and will update the costs.
     Private Sub timerSystem_Tick(sender As Object, e As EventArgs) Handles timerSystem.Tick
 
+        ' Checks if a fare is selected, and if a passenger name has been entered, and if the value inside of the seat count text box is a number.
         If Not lblFare.Text = "" AndAlso Not txtBoxPassengerName.Text = "" AndAlso IsNumeric(txtBoxSeatCount.Text) Then
+            ' Converts the fare text into a cost.
             Dim cost As Double = CDbl(lblFare.Text)
+
+            ' Converts the string for seat count in text box into a integer into the variable seats.
             Dim seats As Integer = CInt(txtBoxSeatCount.Text)
+
+            ' Calculates the final cost by multiplying the cost and seats and converting it into a string with the currency formatting.
             Dim finalCost As String = (cost * seats).ToString("C0")
 
+            ' Updates finalCot variable for the two labels below.
             lblCost.Text = finalCost
             lblTotalCost.Text = "Total Cost: " & finalCost
         End If
     End Sub
-
+    ' Fires whenever the seat count is edited.
     Private Sub txtBoxSeatCount_TextChanged(sender As Object, e As EventArgs) Handles txtBoxSeatCount.TextChanged
+        ' Default seat count and can not go under this amount.
         Dim seatCount As Integer = 1
 
+        ' Checks if the text box for seat count is empty, and if the value inside is a number.
         If Not txtBoxSeatCount.Text = "" AndAlso IsNumeric(txtBoxSeatCount.Text) Then
+            ' Converts the string for seat count in text box into the a integer into the variable seatCount.
             seatCount = CInt(txtBoxSeatCount.Text)
 
+            ' Checks if the entered value is a 0, and will update it to a 1 as it is the minimum
             If seatCount = 0 Then
                 seatCount = 1
                 txtBoxSeatCount.Text = "1"
             End If
 
+            ' Checks if the entered value is greater than 287, and will update it to 287 as it is the maximum if any are found higher.
             If seatCount > 287 Then
                 seatCount = 287
                 txtBoxSeatCount.Text = "287"
             End If
         Else
             lblCost.Text = "$0.00"
-            'lblTotalCost.Text = "Total Cost: $0.00"
         End If
 
+        ' Updates the seat count.
         lblSeatCount.Text = "Seats: " & seatCount
     End Sub
 
+    ' Checks if a passenger name record is filled, before clearing the resevation status.
     Private Sub btnClearStatus_Click(sender As Object, e As EventArgs) Handles btnClearStatus.Click
         If Not lblPNR.Text = "PNR: " Then
             clearReservationStatus()
