@@ -141,20 +141,27 @@ Public Class frmAirline
 
     ' Checks if flight cache is valid, and if fare is declared.
     Private Sub checkFareSelection()
+        ' Checks if the flight cache is empty.
         If flightCache IsNot Nothing Then
+            ' Checks if a flight was selected.
             If fare = "" Then
+                ' Updates the flight to what is in the flight cache for index.
                 fare = flightCache(index)
 
+                ' Disables the visibility for the next flight, or selecting a flight.
                 btnInfoNext.Visible = False
                 btnInfoSelect.Visible = False
 
+                ' Moves the clear button into the middle for design.
                 btnInfoClear.Location = New Point(93, 303)
             Else
+                ' Sends a message box letting the passenger know they need to clear their seleciton before trying to select a new flight.
                 MessageBox.Show("There is already a flight selected, please clear selected to change..", "RCSJ Airline Inc.")
             End If
         End If
     End Sub
 
+    ' Clears the displayed reservation for the nexdt passenger.
     Private Sub clearDisplayReservation()
         lblManagementPNR.Text = "PNR: "
         lblManagementOrigin.Text = "Origin: None"
@@ -162,17 +169,22 @@ Public Class frmAirline
         lblManagementSeatCount.Text = "Seats: 1"
         lblManagementTotalCost.Text = "Total Cost: $0.00"
 
+        ' Makes the group box not visible for the reservation management.
         groupBoxReservationManagement.Visible = False
     End Sub
 
+    ' Clears the information of the fare for a flight change.
     Private Sub clearInformation()
         If fare = "" Then
+            ' Sends a message box that there isn't a flight selected. 
             MessageBox.Show("There is no selected flight to clear.", "RCSJ Airline Inc.")
         Else
+            ' Resets the selection.
             resetSelection()
         End If
     End Sub
 
+    ' Clears the reservation status to not allow the next passenger to see the information. 
     Private Sub clearReservationStatus()
         lblPNR.Text = "PNR: "
 
@@ -181,26 +193,32 @@ Public Class frmAirline
         lblTotalCost.Text = "Total Cost: $0.00"
     End Sub
 
+    ' Shows the reservation of the passenger's flight.
     Private Sub showReservation()
+
+        ' Makes the group box visible for the reservation management.
         groupBoxReservationManagement.Visible = True
 
+        ' Splits the reservation data by three different criterias.
         Dim localLineSplit As String() = reservation.Split(":")
         Dim cities As String() = localLineSplit(2).Split(";")
         Dim cityNames As String() = cities(0).Split(",")
 
+        ' Updates the labels with the new information.
         lblManagementPNR.Text = "PNR: " & localLineSplit(1).Split("#")(0)
         lblManagementOrigin.Text = "Origin: " & cityNames(0)
         lblManagementDestination.Text = "Destination: " & cityNames(1)
         lblManagementSeatCount.Text = "Seats: " & cities(1)
         lblManagementTotalCost.Text = "Total Cost: " & CDbl(localLineSplit(3)).ToString("c2")
 
+        ' Clears both of the text boxes for reservation lookup.
         txtBoxLookupName.Text = ""
         txtBoxLookupPNR.Text = ""
     End Sub
 
     ' Deletes reservation from file.
     Private Sub deleteReservation()
-        ' Grabs file's data int ostring array.
+        ' Grabs file's data into string array.
         Dim resFile As String() = grabResFile()
 
         ' Loops through string array and checks if the grabbed index of the string array is the reservation.
@@ -234,6 +252,7 @@ Public Class frmAirline
             ' Updates passengerName to last name.
             passengerName = passengerNameSplit(passengerNameSplit.Length - 1)
         Else
+            ' Sends a message box that a last name must be provided.
             MessageBox.Show("You need to provide a last name in your name.", "RCSJ Airline Inc.")
             Return
         End If
@@ -269,29 +288,39 @@ Public Class frmAirline
         ' Adds origin flights 
         showOriginFlights()
 
+        ' Clears the labels for time and fare.
         lblTime.Text = ""
         lblFare.Text = ""
 
+        ' Clears the passenger's name and seat count.
         txtBoxPassengerName.Text = ""
         txtBoxSeatCount.Text = ""
 
+        ' Resets the selection.
         resetSelection()
 
+        ' Grabs the file's data into string array.
         Dim resFile As String() = grabResFile()
 
+        ' Resizes the string array to allow one more add to it.
         Array.Resize(resFile, resFile.Length + 1)
 
+        ' Updates the end of the file to add the new flight.
         resFile(resFile.Length - 1) = format
 
+        ' Writes the information into file stored
         IO.File.WriteAllLines("reservations.txt", resFile)
     End Sub
 
     ' Resets clear button back to original location, re-enables next & info buttons, and clears time/fare text.
     Private Sub resetSelection()
+        ' Sets current selected flight to empty.
         fare = ""
 
+        ' Moves clear information button back to original position.
         btnInfoClear.Location = New Point(174, 303)
 
+        ' Sets the information next and select buttons to visible.
         btnInfoNext.Visible = True
         btnInfoSelect.Visible = True
     End Sub
@@ -305,22 +334,32 @@ Public Class frmAirline
         ' Empties flight cache.
         flightCache = Nothing
 
-        ' 
+        ' Shows the orign flights for the names.
         showOriginFlights()
 
+        ' Sets labels for time and fare to empty.
         lblTime.Text = ""
         lblFare.Text = ""
 
+        ' Clears the reservation status.
         clearReservationStatus()
 
+        ' Sets the passenger name record to empty.
         lblPNR.Text = "PNR: "
 
+        ' Sets the origin to none.
         lblOrigin.Text = "Origin: None"
+
+        ' Sets the destination to none.
         lblDestination.Text = "Destination: None"
+
+        ' Sets the total cost to $0.00.
         lblTotalCost.Text = "Total Cost: $0.00"
 
+        ' Resets the selection
         resetSelection()
 
+        ' Allows the one way and round trip to be visible and make one way checked on default.
         rButtonOneWay.Visible = True
         rButtonOneWay.Checked = True
         rButtonRoundTrip.Visible = True
@@ -331,20 +370,29 @@ Public Class frmAirline
         ' Sets index to 0 to prevent out of bounds array issues.
         index = 0
 
+        ' Grabs file's data into string array.
         Dim airfareFile As String() = grabAirfareFile()
+
+        ' Creates a query that splits by a comma, and grabs the origin and destination of each line.
         Dim destinationQuery = From localLine As String In airfareFile
                                Let localLineSplit As String() = localLine.Split(",")
                                Where localLineSplit(0) = listBoxOrigin.SelectedItem
                                Where localLineSplit(1) = listBoxDestination.SelectedItem
                                Select localLine
 
+        ' Updates the flight change after converting the destination query into a list and then into a array.
         flightCache = destinationQuery.ToList.ToArray
 
+        ' Grabs the flight cache's index.
         Dim line As String = flightCache(index)
-            Dim linesplit As String() = line.Split(",")
 
-            lblTime.Text = linesplit(2)
+        ' Splits line by a comma.
+        Dim linesplit As String() = line.Split(",")
 
+        ' Updates time label to the third position of the array.
+        lblTime.Text = linesplit(2)
+
+        ' Updates the fare with the parameters using the third and forth position of the array.
         updateFare(linesplit(3), linesplit(4))
     End Sub
 
@@ -472,11 +520,13 @@ Public Class frmAirline
 
     ' When button is clicked will restart the entire reserve process.
     Private Sub btnRestart_Click(sender As Object, e As EventArgs) Handles btnRestart.Click
+        ' Restarts the process.
         restartProcess()
     End Sub
 
     ' Checks if a flight is selected before updating to another one.
     Private Sub btnInfoSelect_Click(sender As Object, e As EventArgs) Handles btnInfoSelect.Click
+        ' Clears the fare selection.
         checkFareSelection()
     End Sub
 
