@@ -16,7 +16,7 @@
 '
 
 Public Class frmAutoClicker
-    Dim version As String = "1.0.3"
+    Dim version As String = "1.0.4"
     Dim enabled As Boolean = False
     Dim keyBind As String = "F6"
     Private WithEvents kbHook As New KeyboardHook
@@ -39,25 +39,7 @@ Public Class frmAutoClicker
         btnStart.Enabled = False
         btnStop.Enabled = True
 
-        txtBoxHours.Enabled = False
-        txtBoxMinutes.Enabled = False
-        txtBoxSeconds.Enabled = False
-        txtBoxMilliseconds.Enabled = False
-
-        comboBoxMouseButton.Enabled = False
-        comboBoxClickType.Enabled = False
-
-        rButtonRepeat.Enabled = False
-        rButtonRepeatUntilStopped.Enabled = False
-
-        numericUpDownTimes.Enabled = False
-
-        rButtonCurrentLocation.Enabled = False
-        rButtonPickLocation.Enabled = False
-        btnPickLocation.Enabled = False
-
-        txtBoxX.Enabled = False
-        txtBoxY.Enabled = False
+        toggleSettings(False)
     End Sub
 
     Sub stopProgram()
@@ -66,25 +48,29 @@ Public Class frmAutoClicker
         btnStart.Enabled = True
         btnStop.Enabled = False
 
-        txtBoxHours.Enabled = True
-        txtBoxMinutes.Enabled = True
-        txtBoxSeconds.Enabled = True
-        txtBoxMilliseconds.Enabled = True
+        toggleSettings(True)
+    End Sub
 
-        comboBoxMouseButton.Enabled = True
-        comboBoxClickType.Enabled = True
+    Sub toggleSettings(ByRef bool As Boolean)
+        txtBoxHours.Enabled = bool
+        txtBoxMinutes.Enabled = bool
+        txtBoxSeconds.Enabled = bool
+        txtBoxMilliseconds.Enabled = bool
 
-        rButtonRepeat.Enabled = True
-        rButtonRepeatUntilStopped.Enabled = True
+        comboBoxMouseButton.Enabled = bool
+        comboBoxClickType.Enabled = bool
 
-        numericUpDownTimes.Enabled = True
+        rButtonRepeat.Enabled = bool
+        rButtonRepeatUntilStopped.Enabled = bool
 
-        rButtonCurrentLocation.Enabled = True
-        rButtonPickLocation.Enabled = True
-        btnPickLocation.Enabled = True
+        numericUpDownTimes.Enabled = bool
 
-        txtBoxX.Enabled = True
-        txtBoxY.Enabled = True
+        rButtonCurrentLocation.Enabled = bool
+        rButtonPickLocation.Enabled = bool
+        btnPickLocation.Enabled = bool
+
+        txtBoxX.Enabled = bool
+        txtBoxY.Enabled = bool
     End Sub
 
     Private Sub frmAutoClicker_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -99,6 +85,14 @@ Public Class frmAutoClicker
         comboBoxMouseButton.SelectedIndex = 0
         comboBoxClickType.SelectedIndex = 0
 
+    End Sub
+
+    Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
+        startProgram()
+    End Sub
+
+    Private Sub btnStop_Click(sender As Object, e As EventArgs) Handles btnStop.Click
+        stopProgram()
     End Sub
 End Class
 
@@ -172,5 +166,4 @@ Public Class KeyboardHook
         End If
         MyBase.Finalize()
     End Sub
-
 End Class
