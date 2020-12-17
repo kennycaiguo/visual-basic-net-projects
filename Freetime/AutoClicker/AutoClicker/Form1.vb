@@ -16,8 +16,8 @@
 '
 
 Public Class frmAutoClicker
-    Dim version As String = "1.0.5"
-    Dim enabled As Boolean = False
+    Dim version As String = "1.0.6"
+    Private clickerEnabled As Boolean = False
     Dim keyBind As String = "F6"
     Private WithEvents kbHook As New KeyboardHook
 
@@ -25,7 +25,7 @@ Public Class frmAutoClicker
         Dim keyPressed As String = Key.ToString
 
         If (keyPressed = "F6") Then
-            If enabled Then
+            If clickerEnabled Then
                 stopProgram()
             Else
                 startProgram()
@@ -34,7 +34,7 @@ Public Class frmAutoClicker
     End Sub
 
     Sub startProgram()
-        enabled = True
+        clickerEnabled = True
         Me.Text = "Clicking - Auto Clicker " & version
         btnStart.Enabled = False
         btnStop.Enabled = True
@@ -45,7 +45,7 @@ Public Class frmAutoClicker
     End Sub
 
     Sub stopProgram()
-        enabled = False
+        clickerEnabled = False
         Me.Text = "Stopped - Auto Clicker " & version
         btnStart.Enabled = True
         btnStop.Enabled = False
@@ -71,8 +71,6 @@ Public Class frmAutoClicker
         If IsNumeric(txtBoxMilliseconds.Text) Then
             milliseconds += CInt(txtBoxMilliseconds.Text)
         End If
-
-        Console.WriteLine("Milliseconds: " & milliseconds)
 
         Return milliseconds
     End Function
