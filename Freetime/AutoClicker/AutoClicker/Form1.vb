@@ -16,17 +16,89 @@
 '
 
 Public Class frmAutoClicker
+    Dim version As String = "1.0.3"
+    Dim enabled As Boolean = False
+    Dim keyBind As String = "F6"
     Private WithEvents kbHook As New KeyboardHook
 
     Private Sub kbHook_KeyDown(ByVal Key As Keys) Handles kbHook.KeyDown
         Dim keyPressed As String = Key.ToString
+
+        If (keyPressed = "F6") Then
+            If enabled Then
+                stopProgram()
+            Else
+                startProgram()
+            End If
+        End If
+    End Sub
+
+    Sub startProgram()
+        enabled = True
+        Me.Text = "Clicking - Auto Clicker " & version
+        btnStart.Enabled = False
+        btnStop.Enabled = True
+
+        txtBoxHours.Enabled = False
+        txtBoxMinutes.Enabled = False
+        txtBoxSeconds.Enabled = False
+        txtBoxMilliseconds.Enabled = False
+
+        comboBoxMouseButton.Enabled = False
+        comboBoxClickType.Enabled = False
+
+        rButtonRepeat.Enabled = False
+        rButtonRepeatUntilStopped.Enabled = False
+
+        numericUpDownTimes.Enabled = False
+
+        rButtonCurrentLocation.Enabled = False
+        rButtonPickLocation.Enabled = False
+        btnPickLocation.Enabled = False
+
+        txtBoxX.Enabled = False
+        txtBoxY.Enabled = False
+    End Sub
+
+    Sub stopProgram()
+        enabled = False
+        Me.Text = "Stopped - Auto Clicker " & version
+        btnStart.Enabled = True
+        btnStop.Enabled = False
+
+        txtBoxHours.Enabled = True
+        txtBoxMinutes.Enabled = True
+        txtBoxSeconds.Enabled = True
+        txtBoxMilliseconds.Enabled = True
+
+        comboBoxMouseButton.Enabled = True
+        comboBoxClickType.Enabled = True
+
+        rButtonRepeat.Enabled = True
+        rButtonRepeatUntilStopped.Enabled = True
+
+        numericUpDownTimes.Enabled = True
+
+        rButtonCurrentLocation.Enabled = True
+        rButtonPickLocation.Enabled = True
+        btnPickLocation.Enabled = True
+
+        txtBoxX.Enabled = True
+        txtBoxY.Enabled = True
     End Sub
 
     Private Sub frmAutoClicker_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Me.Text = "Auto Clicker " & version
+
+        ' Update text.
+        btnStart.Text = "Start (" & keyBind & ")"
+        btnStop.Text = "Stop (" & keyBind & ")"
+
         ' Click options
         comboBoxMouseButton.SelectedIndex = 0
         comboBoxClickType.SelectedIndex = 0
+
     End Sub
 End Class
 

@@ -234,19 +234,18 @@ Partial Class frmAutoClicker
         '
         'rButtonRepeatUntilStopped
         '
-        Me.rButtonRepeatUntilStopped.AutoCheck = False
         Me.rButtonRepeatUntilStopped.AutoSize = True
         Me.rButtonRepeatUntilStopped.Checked = True
         Me.rButtonRepeatUntilStopped.Location = New System.Drawing.Point(17, 58)
         Me.rButtonRepeatUntilStopped.Name = "rButtonRepeatUntilStopped"
         Me.rButtonRepeatUntilStopped.Size = New System.Drawing.Size(123, 17)
         Me.rButtonRepeatUntilStopped.TabIndex = 1
+        Me.rButtonRepeatUntilStopped.TabStop = True
         Me.rButtonRepeatUntilStopped.Text = "Repeat until stopped"
         Me.rButtonRepeatUntilStopped.UseVisualStyleBackColor = True
         '
         'rButtonRepeat
         '
-        Me.rButtonRepeat.AutoCheck = False
         Me.rButtonRepeat.AutoSize = True
         Me.rButtonRepeat.Location = New System.Drawing.Point(18, 25)
         Me.rButtonRepeat.Name = "rButtonRepeat"
@@ -275,6 +274,7 @@ Partial Class frmAutoClicker
         '
         Me.txtBoxY.Location = New System.Drawing.Point(356, 29)
         Me.txtBoxY.Name = "txtBoxY"
+        Me.txtBoxY.ReadOnly = True
         Me.txtBoxY.Size = New System.Drawing.Size(40, 20)
         Me.txtBoxY.TabIndex = 6
         Me.txtBoxY.Text = "0"
@@ -293,6 +293,7 @@ Partial Class frmAutoClicker
         '
         Me.txtBoxX.Location = New System.Drawing.Point(299, 29)
         Me.txtBoxX.Name = "txtBoxX"
+        Me.txtBoxX.ReadOnly = True
         Me.txtBoxX.Size = New System.Drawing.Size(40, 20)
         Me.txtBoxX.TabIndex = 4
         Me.txtBoxX.Text = "0"
@@ -318,18 +319,15 @@ Partial Class frmAutoClicker
         '
         'rButtonPickLocation
         '
-        Me.rButtonPickLocation.AutoCheck = False
         Me.rButtonPickLocation.AutoSize = True
         Me.rButtonPickLocation.Location = New System.Drawing.Point(157, 31)
         Me.rButtonPickLocation.Name = "rButtonPickLocation"
         Me.rButtonPickLocation.Size = New System.Drawing.Size(14, 13)
         Me.rButtonPickLocation.TabIndex = 1
-        Me.rButtonPickLocation.TabStop = True
         Me.rButtonPickLocation.UseVisualStyleBackColor = True
         '
         'rButtonCurrentLocation
         '
-        Me.rButtonCurrentLocation.AutoCheck = False
         Me.rButtonCurrentLocation.AutoSize = True
         Me.rButtonCurrentLocation.Checked = True
         Me.rButtonCurrentLocation.Location = New System.Drawing.Point(8, 29)
@@ -351,6 +349,7 @@ Partial Class frmAutoClicker
         '
         'btnStop
         '
+        Me.btnStop.Enabled = False
         Me.btnStop.Location = New System.Drawing.Point(233, 246)
         Me.btnStop.Name = "btnStop"
         Me.btnStop.Size = New System.Drawing.Size(189, 41)
@@ -374,7 +373,6 @@ Partial Class frmAutoClicker
         Me.MaximizeBox = False
         Me.Name = "frmAutoClicker"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Auto Clicker 1.0"
         Me.TopMost = True
         Me.groupBoxClickInterval.ResumeLayout(False)
         Me.groupBoxClickInterval.PerformLayout()
