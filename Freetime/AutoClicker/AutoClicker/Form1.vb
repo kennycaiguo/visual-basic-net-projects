@@ -16,10 +16,13 @@
 '
 
 Public Class frmAutoClicker
-    Dim version As String = "1.0.6"
+
+    Dim version As String = "1.0.7"
     Private clickerEnabled As Boolean = False
     Dim keyBind As String = "F6"
     Private WithEvents kbHook As New KeyboardHook
+    Private Declare Sub mouse_event Lib "user32.dll" (ByVal dwFlags As Integer, ByVal dx As Integer, ByVal dy As Integer, ByVal cButtons As Integer, ByVal dwExtraInfo As IntPtr)
+    Dim clicksRemaining As Integer = 0
 
     Private Sub kbHook_KeyDown(ByVal Key As Keys) Handles kbHook.KeyDown
         Dim keyPressed As String = Key.ToString
@@ -41,6 +44,10 @@ Public Class frmAutoClicker
 
         systemClicker.Interval = getTime()
 
+        If rButtonRepeat.Checked Then
+            clicksRemaining = numericUpDownTimes.Value
+        End If
+
         toggleSettings(False)
     End Sub
 
@@ -51,6 +58,8 @@ Public Class frmAutoClicker
         btnStop.Enabled = False
 
         toggleSettings(True)
+
+        clicksRemaining = 0
     End Sub
 
     Function getTime() As Integer
@@ -123,6 +132,14 @@ Public Class frmAutoClicker
 
     Private Sub systemClicker_Tick(sender As Object, e As EventArgs) Handles systemClicker.Tick
         'Console.WriteLine("hi")
+        Dim mouseButton As String = comboBoxMouseButton.SelectedItem
+        Dim clickType As String = comboBoxClickType.SelectedItem
+
+        If clicksRemaining = 0 Then
+
+        Else
+
+        End If
     End Sub
 End Class
 
