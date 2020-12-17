@@ -110,10 +110,8 @@ Public Class KeyboardHook
 
     <StructLayout(LayoutKind.Sequential)>
     Private Structure KBDLLHOOKSTRUCT
-        Public vkCode As UInt32
-        Public scanCode As UInt32
+        Public vkCode, scanCode, time As UInt32
         Public flags As KBDLLHOOKSTRUCTFlags
-        Public time As UInt32
         Public dwExtraInfo As UIntPtr
     End Structure
 
