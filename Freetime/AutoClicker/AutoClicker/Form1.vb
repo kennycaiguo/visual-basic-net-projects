@@ -16,7 +16,7 @@
 '
 
 Public Class frmAutoClicker
-    Dim version As String = "1.0.4"
+    Dim version As String = "1.0.5"
     Dim enabled As Boolean = False
     Dim keyBind As String = "F6"
     Private WithEvents kbHook As New KeyboardHook
@@ -39,6 +39,8 @@ Public Class frmAutoClicker
         btnStart.Enabled = False
         btnStop.Enabled = True
 
+        systemClicker.Interval = getTime()
+
         toggleSettings(False)
     End Sub
 
@@ -51,7 +53,33 @@ Public Class frmAutoClicker
         toggleSettings(True)
     End Sub
 
+    Function getTime() As Integer
+        Dim milliseconds As Integer = 0
+
+        If IsNumeric(txtBoxHours.Text) Then
+            milliseconds += (CInt(txtBoxHours.Text) * 3600000)
+        End If
+
+        If IsNumeric(txtBoxMinutes.Text) Then
+            milliseconds += (CInt(txtBoxMinutes.Text) * 60000)
+        End If
+
+        If IsNumeric(txtBoxSeconds.Text) Then
+            milliseconds += (CInt(txtBoxSeconds.Text) * 1000)
+        End If
+
+        If IsNumeric(txtBoxMilliseconds.Text) Then
+            milliseconds += CInt(txtBoxMilliseconds.Text)
+        End If
+
+        Console.WriteLine("Milliseconds: " & milliseconds)
+
+        Return milliseconds
+    End Function
+
     Sub toggleSettings(ByRef bool As Boolean)
+        systemClicker.Enabled = Not bool
+
         txtBoxHours.Enabled = bool
         txtBoxMinutes.Enabled = bool
         txtBoxSeconds.Enabled = bool
@@ -93,6 +121,10 @@ Public Class frmAutoClicker
 
     Private Sub btnStop_Click(sender As Object, e As EventArgs) Handles btnStop.Click
         stopProgram()
+    End Sub
+
+    Private Sub systemClicker_Tick(sender As Object, e As EventArgs) Handles systemClicker.Tick
+        'Console.WriteLine("hi")
     End Sub
 End Class
 

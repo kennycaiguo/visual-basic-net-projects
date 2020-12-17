@@ -22,6 +22,7 @@ Partial Class frmAutoClicker
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAutoClicker))
         Me.groupBoxClickInterval = New System.Windows.Forms.GroupBox()
         Me.lblMilliseconds = New System.Windows.Forms.Label()
@@ -52,6 +53,7 @@ Partial Class frmAutoClicker
         Me.rButtonCurrentLocation = New System.Windows.Forms.RadioButton()
         Me.btnStart = New System.Windows.Forms.Button()
         Me.btnStop = New System.Windows.Forms.Button()
+        Me.systemClicker = New System.Windows.Forms.Timer(Me.components)
         Me.groupBoxClickInterval.SuspendLayout()
         Me.groupBoxClickOptions.SuspendLayout()
         Me.groupBoxClickRepeat.SuspendLayout()
@@ -357,6 +359,9 @@ Partial Class frmAutoClicker
         Me.btnStop.Text = "Stop (F6)"
         Me.btnStop.UseVisualStyleBackColor = True
         '
+        'systemClicker
+        '
+        '
         'frmAutoClicker
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -416,4 +421,5 @@ Partial Class frmAutoClicker
     Friend WithEvents rButtonCurrentLocation As RadioButton
     Friend WithEvents btnStart As Button
     Friend WithEvents btnStop As Button
+    Friend WithEvents systemClicker As Timer
 End Class
