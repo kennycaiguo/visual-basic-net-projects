@@ -17,12 +17,12 @@
 
 Public Class frmAutoClicker
 
-    Dim version As String = "1.0.7"
+    Dim version As String = "1.0.8"
     Private clickerEnabled As Boolean = False
     Dim keyBind As String = "F6"
     Private WithEvents kbHook As New KeyboardHook
     Private Declare Sub mouse_event Lib "user32.dll" (ByVal dwFlags As Integer, ByVal dx As Integer, ByVal dy As Integer, ByVal cButtons As Integer, ByVal dwExtraInfo As IntPtr)
-    Dim clicksRemaining As Integer = 0
+    Dim clicksRemaining As Integer = -1
 
     Private Sub kbHook_KeyDown(ByVal Key As Keys) Handles kbHook.KeyDown
         Dim keyPressed As String = Key.ToString
@@ -46,6 +46,7 @@ Public Class frmAutoClicker
 
         If rButtonRepeat.Checked Then
             clicksRemaining = numericUpDownTimes.Value
+            Console.WriteLine("hi")
         End If
 
         toggleSettings(False)
@@ -59,7 +60,7 @@ Public Class frmAutoClicker
 
         toggleSettings(True)
 
-        clicksRemaining = 0
+        clicksRemaining = -1
     End Sub
 
     Function getTime() As Integer
@@ -131,14 +132,26 @@ Public Class frmAutoClicker
     End Sub
 
     Private Sub systemClicker_Tick(sender As Object, e As EventArgs) Handles systemClicker.Tick
-        'Console.WriteLine("hi")
+        If clicksRemaining = -1 Then
+            executeClick()
+        ElseIf clicksRemaining > 0 Then
+            executeClick()
+            clicksRemaining -= 1
+        Else
+            stopProgram()
+        End If
+    End Sub
+
+    Sub executeClick()
         Dim mouseButton As String = comboBoxMouseButton.SelectedItem
         Dim clickType As String = comboBoxClickType.SelectedItem
 
-        If clicksRemaining = 0 Then
-
+        If mouseButton = "Left" Then
+            Console.WriteLine("Left")
+        ElseIf mouseButton = "Right" Then
+            Console.WriteLine("Right")
         Else
-
+            Console.WriteLine("Middle")
         End If
     End Sub
 End Class
@@ -188,11 +201,13 @@ Public Class KeyboardHook
     Private Function KeyboardProc(ByVal nCode As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As Integer
         If (nCode = HC_ACTION) Then
             Dim struct As KBDLLHOOKSTRUCT
+            Dim keyType As Keys = CType(CType(Marshal.PtrToStructure(lParam, struct.GetType()), KBDLLHOOKSTRUCT).vkCode, Keys)
+
             Select Case wParam
                 Case WM_KEYDOWN, WM_SYSKEYDOWN
-                    RaiseEvent KeyDown(CType(CType(Marshal.PtrToStructure(lParam, struct.GetType()), KBDLLHOOKSTRUCT).vkCode, Keys))
+                    RaiseEvent KeyDown(keyType)
                 Case WM_KEYUP, WM_SYSKEYUP
-                    RaiseEvent KeyUp(CType(CType(Marshal.PtrToStructure(lParam, struct.GetType()), KBDLLHOOKSTRUCT).vkCode, Keys))
+                    RaiseEvent KeyUp(keyType)
             End Select
         End If
         Return CallNextHookEx(IntPtr.Zero, nCode, wParam, lParam)
