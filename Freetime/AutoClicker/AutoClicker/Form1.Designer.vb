@@ -344,7 +344,7 @@ Partial Class frmAutoClicker
         '
         Me.btnStart.Location = New System.Drawing.Point(22, 246)
         Me.btnStart.Name = "btnStart"
-        Me.btnStart.Size = New System.Drawing.Size(189, 41)
+        Me.btnStart.Size = New System.Drawing.Size(173, 41)
         Me.btnStart.TabIndex = 9
         Me.btnStart.Text = "Start (F6)"
         Me.btnStart.UseVisualStyleBackColor = True
@@ -352,9 +352,9 @@ Partial Class frmAutoClicker
         'btnStop
         '
         Me.btnStop.Enabled = False
-        Me.btnStop.Location = New System.Drawing.Point(233, 246)
+        Me.btnStop.Location = New System.Drawing.Point(238, 246)
         Me.btnStop.Name = "btnStop"
-        Me.btnStop.Size = New System.Drawing.Size(189, 41)
+        Me.btnStop.Size = New System.Drawing.Size(173, 41)
         Me.btnStop.TabIndex = 10
         Me.btnStop.Text = "Stop (F6)"
         Me.btnStop.UseVisualStyleBackColor = True
@@ -374,11 +374,11 @@ Partial Class frmAutoClicker
         Me.Controls.Add(Me.groupBoxClickRepeat)
         Me.Controls.Add(Me.groupBoxClickOptions)
         Me.Controls.Add(Me.groupBoxClickInterval)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "frmAutoClicker"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.TopMost = True
         Me.groupBoxClickInterval.ResumeLayout(False)
         Me.groupBoxClickInterval.PerformLayout()
         Me.groupBoxClickOptions.ResumeLayout(False)

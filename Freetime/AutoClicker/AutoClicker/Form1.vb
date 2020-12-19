@@ -17,7 +17,7 @@
 
 Public Class frmAutoClicker
 
-    Dim version As String = "1.0.8"
+    Dim version As String = "1.1.1"
     Private clickerEnabled As Boolean = False
     Dim keyBind As String = "F6"
     Private WithEvents kbHook As New KeyboardHook
@@ -39,8 +39,6 @@ Public Class frmAutoClicker
     Sub startProgram()
         clickerEnabled = True
         Me.Text = "Clicking - Auto Clicker " & version
-        btnStart.Enabled = False
-        btnStop.Enabled = True
 
         systemClicker.Interval = getTime()
 
@@ -55,8 +53,6 @@ Public Class frmAutoClicker
     Sub stopProgram()
         clickerEnabled = False
         Me.Text = "Stopped - Auto Clicker " & version
-        btnStart.Enabled = True
-        btnStop.Enabled = False
 
         toggleSettings(True)
 
@@ -86,6 +82,8 @@ Public Class frmAutoClicker
     End Function
 
     Sub toggleSettings(ByRef bool As Boolean)
+        btnStart.Enabled = bool
+        btnStop.Enabled = Not bool
         systemClicker.Enabled = Not bool
 
         txtBoxHours.Enabled = bool
@@ -147,11 +145,11 @@ Public Class frmAutoClicker
         Dim clickType As String = comboBoxClickType.SelectedItem
 
         If mouseButton = "Left" Then
-            Console.WriteLine("Left")
+            'Console.WriteLine("Left")
         ElseIf mouseButton = "Right" Then
-            Console.WriteLine("Right")
+            'Console.WriteLine("Right")
         Else
-            Console.WriteLine("Middle")
+            'Console.WriteLine("Middle")
         End If
     End Sub
 End Class
