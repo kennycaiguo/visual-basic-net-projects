@@ -17,9 +17,8 @@
 
 Public Class frmAutoClicker
 
-    Dim version As String = "1.1.1"
+    Dim version As String = "1.1.2"
     Private clickerEnabled As Boolean = False
-    Dim keyBind As String = "F6"
     Private WithEvents kbHook As New KeyboardHook
     Private Declare Sub mouse_event Lib "user32.dll" (ByVal dwFlags As Integer, ByVal dx As Integer, ByVal dy As Integer, ByVal cButtons As Integer, ByVal dwExtraInfo As IntPtr)
     Dim clicksRemaining As Integer = -1
@@ -44,7 +43,6 @@ Public Class frmAutoClicker
 
         If rButtonRepeat.Checked Then
             clicksRemaining = numericUpDownTimes.Value
-            Console.WriteLine("hi")
         End If
 
         toggleSettings(False)
@@ -112,8 +110,8 @@ Public Class frmAutoClicker
         Me.Text = "Auto Clicker " & version
 
         ' Update text.
-        btnStart.Text = "Start (" & keyBind & ")"
-        btnStop.Text = "Stop (" & keyBind & ")"
+        btnStart.Text = "Start (F6)"
+        btnStop.Text = "Stop (F6)"
 
         ' Click options
         comboBoxMouseButton.SelectedIndex = 0
