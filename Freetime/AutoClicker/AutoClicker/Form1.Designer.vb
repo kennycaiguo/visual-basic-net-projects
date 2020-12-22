@@ -285,7 +285,7 @@ Partial Class frmAutoClicker
         Me.MaximizeBox = False
         Me.Name = "frmAutoClicker"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Auto Clicker 1.1.5"
+        Me.Text = "Auto Clicker 1.1.6"
         Me.groupBoxClickInterval.ResumeLayout(False)
         Me.groupBoxClickInterval.PerformLayout()
         Me.groupBoxClickOptions.ResumeLayout(False)
