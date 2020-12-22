@@ -43,14 +43,6 @@ Partial Class frmAutoClicker
         Me.numericUpDownTimes = New System.Windows.Forms.NumericUpDown()
         Me.rButtonRepeatUntilStopped = New System.Windows.Forms.RadioButton()
         Me.rButtonRepeat = New System.Windows.Forms.RadioButton()
-        Me.groupBoxCursorPosition = New System.Windows.Forms.GroupBox()
-        Me.txtBoxY = New System.Windows.Forms.TextBox()
-        Me.lblY = New System.Windows.Forms.Label()
-        Me.txtBoxX = New System.Windows.Forms.TextBox()
-        Me.lblX = New System.Windows.Forms.Label()
-        Me.btnPickLocation = New System.Windows.Forms.Button()
-        Me.rButtonPickLocation = New System.Windows.Forms.RadioButton()
-        Me.rButtonCurrentLocation = New System.Windows.Forms.RadioButton()
         Me.btnStart = New System.Windows.Forms.Button()
         Me.btnStop = New System.Windows.Forms.Button()
         Me.systemClicker = New System.Windows.Forms.Timer(Me.components)
@@ -58,7 +50,6 @@ Partial Class frmAutoClicker
         Me.groupBoxClickOptions.SuspendLayout()
         Me.groupBoxClickRepeat.SuspendLayout()
         CType(Me.numericUpDownTimes, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.groupBoxCursorPosition.SuspendLayout()
         Me.SuspendLayout()
         '
         'groupBoxClickInterval
@@ -158,7 +149,7 @@ Partial Class frmAutoClicker
         Me.groupBoxClickOptions.Controls.Add(Me.lblMouseButton)
         Me.groupBoxClickOptions.Location = New System.Drawing.Point(13, 77)
         Me.groupBoxClickOptions.Name = "groupBoxClickOptions"
-        Me.groupBoxClickOptions.Size = New System.Drawing.Size(190, 90)
+        Me.groupBoxClickOptions.Size = New System.Drawing.Size(203, 90)
         Me.groupBoxClickOptions.TabIndex = 1
         Me.groupBoxClickOptions.TabStop = False
         Me.groupBoxClickOptions.Text = "Click options"
@@ -169,7 +160,7 @@ Partial Class frmAutoClicker
         Me.comboBoxClickType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.comboBoxClickType.FormattingEnabled = True
         Me.comboBoxClickType.Items.AddRange(New Object() {"Single", "Double"})
-        Me.comboBoxClickType.Location = New System.Drawing.Point(103, 57)
+        Me.comboBoxClickType.Location = New System.Drawing.Point(113, 58)
         Me.comboBoxClickType.Name = "comboBoxClickType"
         Me.comboBoxClickType.Size = New System.Drawing.Size(69, 21)
         Me.comboBoxClickType.TabIndex = 11
@@ -180,7 +171,7 @@ Partial Class frmAutoClicker
         Me.comboBoxMouseButton.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.comboBoxMouseButton.FormattingEnabled = True
         Me.comboBoxMouseButton.Items.AddRange(New Object() {"Left", "Right", "Middle"})
-        Me.comboBoxMouseButton.Location = New System.Drawing.Point(103, 24)
+        Me.comboBoxMouseButton.Location = New System.Drawing.Point(113, 24)
         Me.comboBoxMouseButton.Name = "comboBoxMouseButton"
         Me.comboBoxMouseButton.Size = New System.Drawing.Size(69, 21)
         Me.comboBoxMouseButton.TabIndex = 10
@@ -209,9 +200,9 @@ Partial Class frmAutoClicker
         Me.groupBoxClickRepeat.Controls.Add(Me.numericUpDownTimes)
         Me.groupBoxClickRepeat.Controls.Add(Me.rButtonRepeatUntilStopped)
         Me.groupBoxClickRepeat.Controls.Add(Me.rButtonRepeat)
-        Me.groupBoxClickRepeat.Location = New System.Drawing.Point(220, 77)
+        Me.groupBoxClickRepeat.Location = New System.Drawing.Point(225, 77)
         Me.groupBoxClickRepeat.Name = "groupBoxClickRepeat"
-        Me.groupBoxClickRepeat.Size = New System.Drawing.Size(208, 90)
+        Me.groupBoxClickRepeat.Size = New System.Drawing.Size(203, 90)
         Me.groupBoxClickRepeat.TabIndex = 2
         Me.groupBoxClickRepeat.TabStop = False
         Me.groupBoxClickRepeat.Text = "Click repeat"
@@ -256,93 +247,9 @@ Partial Class frmAutoClicker
         Me.rButtonRepeat.Text = "Repeat"
         Me.rButtonRepeat.UseVisualStyleBackColor = True
         '
-        'groupBoxCursorPosition
-        '
-        Me.groupBoxCursorPosition.Controls.Add(Me.txtBoxY)
-        Me.groupBoxCursorPosition.Controls.Add(Me.lblY)
-        Me.groupBoxCursorPosition.Controls.Add(Me.txtBoxX)
-        Me.groupBoxCursorPosition.Controls.Add(Me.lblX)
-        Me.groupBoxCursorPosition.Controls.Add(Me.btnPickLocation)
-        Me.groupBoxCursorPosition.Controls.Add(Me.rButtonPickLocation)
-        Me.groupBoxCursorPosition.Controls.Add(Me.rButtonCurrentLocation)
-        Me.groupBoxCursorPosition.Location = New System.Drawing.Point(14, 173)
-        Me.groupBoxCursorPosition.Name = "groupBoxCursorPosition"
-        Me.groupBoxCursorPosition.Size = New System.Drawing.Size(414, 67)
-        Me.groupBoxCursorPosition.TabIndex = 8
-        Me.groupBoxCursorPosition.TabStop = False
-        Me.groupBoxCursorPosition.Text = "Cursor position"
-        '
-        'txtBoxY
-        '
-        Me.txtBoxY.Location = New System.Drawing.Point(356, 29)
-        Me.txtBoxY.Name = "txtBoxY"
-        Me.txtBoxY.ReadOnly = True
-        Me.txtBoxY.Size = New System.Drawing.Size(40, 20)
-        Me.txtBoxY.TabIndex = 6
-        Me.txtBoxY.Text = "0"
-        Me.txtBoxY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'lblY
-        '
-        Me.lblY.AutoSize = True
-        Me.lblY.Location = New System.Drawing.Point(345, 33)
-        Me.lblY.Name = "lblY"
-        Me.lblY.Size = New System.Drawing.Size(14, 13)
-        Me.lblY.TabIndex = 5
-        Me.lblY.Text = "Y"
-        '
-        'txtBoxX
-        '
-        Me.txtBoxX.Location = New System.Drawing.Point(299, 29)
-        Me.txtBoxX.Name = "txtBoxX"
-        Me.txtBoxX.ReadOnly = True
-        Me.txtBoxX.Size = New System.Drawing.Size(40, 20)
-        Me.txtBoxX.TabIndex = 4
-        Me.txtBoxX.Text = "0"
-        Me.txtBoxX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'lblX
-        '
-        Me.lblX.AutoSize = True
-        Me.lblX.Location = New System.Drawing.Point(286, 33)
-        Me.lblX.Name = "lblX"
-        Me.lblX.Size = New System.Drawing.Size(14, 13)
-        Me.lblX.TabIndex = 3
-        Me.lblX.Text = "X"
-        '
-        'btnPickLocation
-        '
-        Me.btnPickLocation.Location = New System.Drawing.Point(177, 22)
-        Me.btnPickLocation.Name = "btnPickLocation"
-        Me.btnPickLocation.Size = New System.Drawing.Size(96, 30)
-        Me.btnPickLocation.TabIndex = 2
-        Me.btnPickLocation.Text = "Pick location"
-        Me.btnPickLocation.UseVisualStyleBackColor = True
-        '
-        'rButtonPickLocation
-        '
-        Me.rButtonPickLocation.AutoSize = True
-        Me.rButtonPickLocation.Location = New System.Drawing.Point(157, 31)
-        Me.rButtonPickLocation.Name = "rButtonPickLocation"
-        Me.rButtonPickLocation.Size = New System.Drawing.Size(14, 13)
-        Me.rButtonPickLocation.TabIndex = 1
-        Me.rButtonPickLocation.UseVisualStyleBackColor = True
-        '
-        'rButtonCurrentLocation
-        '
-        Me.rButtonCurrentLocation.AutoSize = True
-        Me.rButtonCurrentLocation.Checked = True
-        Me.rButtonCurrentLocation.Location = New System.Drawing.Point(8, 29)
-        Me.rButtonCurrentLocation.Name = "rButtonCurrentLocation"
-        Me.rButtonCurrentLocation.Size = New System.Drawing.Size(99, 17)
-        Me.rButtonCurrentLocation.TabIndex = 0
-        Me.rButtonCurrentLocation.TabStop = True
-        Me.rButtonCurrentLocation.Text = "Current location"
-        Me.rButtonCurrentLocation.UseVisualStyleBackColor = True
-        '
         'btnStart
         '
-        Me.btnStart.Location = New System.Drawing.Point(22, 246)
+        Me.btnStart.Location = New System.Drawing.Point(22, 173)
         Me.btnStart.Name = "btnStart"
         Me.btnStart.Size = New System.Drawing.Size(173, 41)
         Me.btnStart.TabIndex = 9
@@ -352,7 +259,7 @@ Partial Class frmAutoClicker
         'btnStop
         '
         Me.btnStop.Enabled = False
-        Me.btnStop.Location = New System.Drawing.Point(238, 246)
+        Me.btnStop.Location = New System.Drawing.Point(242, 173)
         Me.btnStop.Name = "btnStop"
         Me.btnStop.Size = New System.Drawing.Size(173, 41)
         Me.btnStop.TabIndex = 10
@@ -367,10 +274,9 @@ Partial Class frmAutoClicker
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(440, 293)
+        Me.ClientSize = New System.Drawing.Size(440, 221)
         Me.Controls.Add(Me.btnStop)
         Me.Controls.Add(Me.btnStart)
-        Me.Controls.Add(Me.groupBoxCursorPosition)
         Me.Controls.Add(Me.groupBoxClickRepeat)
         Me.Controls.Add(Me.groupBoxClickOptions)
         Me.Controls.Add(Me.groupBoxClickInterval)
@@ -379,6 +285,7 @@ Partial Class frmAutoClicker
         Me.MaximizeBox = False
         Me.Name = "frmAutoClicker"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Auto Clicker 1.1.5"
         Me.groupBoxClickInterval.ResumeLayout(False)
         Me.groupBoxClickInterval.PerformLayout()
         Me.groupBoxClickOptions.ResumeLayout(False)
@@ -386,8 +293,6 @@ Partial Class frmAutoClicker
         Me.groupBoxClickRepeat.ResumeLayout(False)
         Me.groupBoxClickRepeat.PerformLayout()
         CType(Me.numericUpDownTimes, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.groupBoxCursorPosition.ResumeLayout(False)
-        Me.groupBoxCursorPosition.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -411,14 +316,6 @@ Partial Class frmAutoClicker
     Friend WithEvents numericUpDownTimes As NumericUpDown
     Friend WithEvents rButtonRepeatUntilStopped As RadioButton
     Friend WithEvents rButtonRepeat As RadioButton
-    Friend WithEvents groupBoxCursorPosition As GroupBox
-    Friend WithEvents txtBoxY As TextBox
-    Friend WithEvents lblY As Label
-    Friend WithEvents txtBoxX As TextBox
-    Friend WithEvents lblX As Label
-    Friend WithEvents btnPickLocation As Button
-    Friend WithEvents rButtonPickLocation As RadioButton
-    Friend WithEvents rButtonCurrentLocation As RadioButton
     Friend WithEvents btnStart As Button
     Friend WithEvents btnStop As Button
     Friend WithEvents systemClicker As Timer

@@ -17,16 +17,23 @@
 
 Public Class frmAutoClicker
 
-    Dim version As String = "1.1.2"
-    Private clickerEnabled As Boolean = False
+    Dim clickerEnabled As Boolean = False
     Private WithEvents kbHook As New KeyboardHook
     Private Declare Sub mouse_event Lib "user32.dll" (ByVal dwFlags As Integer, ByVal dx As Integer, ByVal dy As Integer, ByVal cButtons As Integer, ByVal dwExtraInfo As IntPtr)
     Dim clicksRemaining As Integer = -1
+    Dim mouseButton As String
+    Dim clickType As String
 
-    Private Sub kbHook_KeyDown(ByVal Key As Keys) Handles kbHook.KeyDown
-        Dim keyPressed As String = Key.ToString
+    Public Const MOUSEEVENTF_LEFTDOWN = &H2
+    Public Const MOUSEEVENTF_LEFTUP = &H4
+    Public Const MOUSEEVENTF_MIDDLEDOWN = &H20
+    Public Const MOUSEEVENTF_MIDDLEUP = &H40
+    Public Const MOUSEEVENTF_RIGHTDOWN = &H8
+    Public Const MOUSEEVENTF_RIGHTUP = &H10
+    Public Const MOUSEEVENTF_MOVE = &H1
 
-        If (keyPressed = "F6") Then
+    Private Sub keyPressed(ByVal Key As Keys) Handles kbHook.KeyDown
+        If (Key.ToString = "F6") Then
             If clickerEnabled Then
                 stopProgram()
             Else
@@ -36,21 +43,24 @@ Public Class frmAutoClicker
     End Sub
 
     Sub startProgram()
-        clickerEnabled = True
-        Me.Text = "Clicking - Auto Clicker " & version
+        Me.Text = "Clicking - Auto Clicker 1.1.5"
 
-        systemClicker.Interval = getTime()
+        Dim time As Integer = getTime()
+
+        systemClicker.Interval = If(time = 0, 1, time)
 
         If rButtonRepeat.Checked Then
             clicksRemaining = numericUpDownTimes.Value
         End If
 
+        mouseButton = comboBoxMouseButton.SelectedItem
+        clickType = comboBoxClickType.SelectedItem
+
         toggleSettings(False)
     End Sub
 
     Sub stopProgram()
-        clickerEnabled = False
-        Me.Text = "Stopped - Auto Clicker " & version
+        Me.Text = "Stopped - Auto Clicker 1.1.5"
 
         toggleSettings(True)
 
@@ -80,6 +90,8 @@ Public Class frmAutoClicker
     End Function
 
     Sub toggleSettings(ByRef bool As Boolean)
+        clickerEnabled = Not bool
+
         btnStart.Enabled = bool
         btnStop.Enabled = Not bool
         systemClicker.Enabled = Not bool
@@ -96,24 +108,10 @@ Public Class frmAutoClicker
         rButtonRepeatUntilStopped.Enabled = bool
 
         numericUpDownTimes.Enabled = bool
-
-        rButtonCurrentLocation.Enabled = bool
-        rButtonPickLocation.Enabled = bool
-        btnPickLocation.Enabled = bool
-
-        txtBoxX.Enabled = bool
-        txtBoxY.Enabled = bool
     End Sub
 
     Private Sub frmAutoClicker_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Me.Text = "Auto Clicker " & version
-
-        ' Update text.
-        btnStart.Text = "Start (F6)"
-        btnStop.Text = "Stop (F6)"
-
-        ' Click options
         comboBoxMouseButton.SelectedIndex = 0
         comboBoxClickType.SelectedIndex = 0
 
@@ -128,26 +126,42 @@ Public Class frmAutoClicker
     End Sub
 
     Private Sub systemClicker_Tick(sender As Object, e As EventArgs) Handles systemClicker.Tick
-        If clicksRemaining = -1 Then
-            executeClick()
-        ElseIf clicksRemaining > 0 Then
-            executeClick()
-            clicksRemaining -= 1
-        Else
-            stopProgram()
-        End If
+        Select Case clicksRemaining
+            Case Is = -1
+                executeClick()
+            Case Is > 0
+                executeClick()
+                clicksRemaining -= 1
+            Case Else
+                stopProgram()
+        End Select
     End Sub
 
     Sub executeClick()
-        Dim mouseButton As String = comboBoxMouseButton.SelectedItem
-        Dim clickType As String = comboBoxClickType.SelectedItem
-
         If mouseButton = "Left" Then
-            'Console.WriteLine("Left")
+            mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
+
+            If clickType = "Double" Then
+                mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
+            End If
+
+            mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
         ElseIf mouseButton = "Right" Then
-            'Console.WriteLine("Right")
+            mouse_event(MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0)
+
+            If clickType = "Double" Then
+                mouse_event(MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0)
+            End If
+
+            mouse_event(MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0)
         Else
-            'Console.WriteLine("Middle")
+            mouse_event(MOUSEEVENTF_MIDDLEDOWN, 0, 0, 0, 0)
+
+            If clickType = "Double" Then
+                mouse_event(MOUSEEVENTF_MIDDLEDOWN, 0, 0, 0, 0)
+            End If
+
+            mouse_event(MOUSEEVENTF_MIDDLEUP, 0, 0, 0, 0)
         End If
     End Sub
 End Class
@@ -157,9 +171,11 @@ Public Class KeyboardHook
     <DllImport("User32.dll", CharSet:=CharSet.Auto, CallingConvention:=CallingConvention.StdCall)>
     Private Overloads Shared Function SetWindowsHookEx(ByVal idHook As Integer, ByVal HookProc As KBDLLHookProc, ByVal hInstance As IntPtr, ByVal wParam As Integer) As Integer
     End Function
+
     <DllImport("User32.dll", CharSet:=CharSet.Auto, CallingConvention:=CallingConvention.StdCall)>
     Private Overloads Shared Function CallNextHookEx(ByVal idHook As Integer, ByVal nCode As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As Integer
     End Function
+
     <DllImport("User32.dll", CharSet:=CharSet.Auto, CallingConvention:=CallingConvention.StdCall)>
     Private Overloads Shared Function UnhookWindowsHookEx(ByVal idHook As Integer) As Boolean
     End Function
@@ -180,14 +196,13 @@ Public Class KeyboardHook
     End Enum
 
     Public Shared Event KeyDown(ByVal Key As Keys)
-    Public Shared Event KeyUp(ByVal Key As Keys)
 
     Private Const WH_KEYBOARD_LL As Integer = 13
     Private Const HC_ACTION As Integer = 0
     Private Const WM_KEYDOWN = &H100
     Private Const WM_KEYUP = &H101
     Private Const WM_SYSKEYDOWN = &H104
-    Private Const WM_SYSKEYUP = &H105
+
 
     Private Delegate Function KBDLLHookProc(ByVal nCode As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As Integer
 
@@ -202,8 +217,6 @@ Public Class KeyboardHook
             Select Case wParam
                 Case WM_KEYDOWN, WM_SYSKEYDOWN
                     RaiseEvent KeyDown(keyType)
-                Case WM_KEYUP, WM_SYSKEYUP
-                    RaiseEvent KeyUp(keyType)
             End Select
         End If
         Return CallNextHookEx(IntPtr.Zero, nCode, wParam, lParam)
