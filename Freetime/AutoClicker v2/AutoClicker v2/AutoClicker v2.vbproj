@@ -99,6 +99,18 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoClicker.Designer.vb">
+      <DependentUpon>AutoClicker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AutoClicker.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AutoClickerLoading.Designer.vb">
+      <DependentUpon>AutoClickerLoading.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AutoClickerLoading.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +135,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AutoClicker.resx">
+      <DependentUpon>AutoClicker.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AutoClickerLoading.resx">
+      <DependentUpon>AutoClickerLoading.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>

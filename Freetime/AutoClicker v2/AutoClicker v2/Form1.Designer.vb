@@ -44,7 +44,7 @@ Partial Class frmAutoClickerSetup
         '
         'setupBackground
         '
-        Me.setupBackground.ImageLocation = "Images/setup-background.jpg"
+        Me.setupBackground.ImageLocation = ""
         Me.setupBackground.InitialImage = CType(resources.GetObject("setupBackground.InitialImage"), System.Drawing.Image)
         Me.setupBackground.Location = New System.Drawing.Point(-1, 0)
         Me.setupBackground.Name = "setupBackground"
@@ -92,7 +92,7 @@ Partial Class frmAutoClickerSetup
         '
         'setupArt
         '
-        Me.setupArt.ImageLocation = "Images/setup-art.jpg"
+        Me.setupArt.ImageLocation = ""
         Me.setupArt.Location = New System.Drawing.Point(-1, 0)
         Me.setupArt.Name = "setupArt"
         Me.setupArt.Size = New System.Drawing.Size(136, 303)
@@ -134,6 +134,7 @@ Partial Class frmAutoClickerSetup
         'radioButtonFull
         '
         Me.radioButtonFull.AutoSize = True
+        Me.radioButtonFull.BackColor = System.Drawing.Color.Transparent
         Me.radioButtonFull.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.radioButtonFull.Location = New System.Drawing.Point(157, 127)
         Me.radioButtonFull.Name = "radioButtonFull"
@@ -141,36 +142,39 @@ Partial Class frmAutoClickerSetup
         Me.radioButtonFull.TabIndex = 10
         Me.radioButtonFull.TabStop = True
         Me.radioButtonFull.Text = "&Full (Recommended)"
-        Me.radioButtonFull.UseVisualStyleBackColor = True
+        Me.radioButtonFull.UseVisualStyleBackColor = False
         Me.radioButtonFull.Visible = False
         '
         'radioButtonCustom
         '
         Me.radioButtonCustom.AutoSize = True
+        Me.radioButtonCustom.BackColor = System.Drawing.Color.Transparent
         Me.radioButtonCustom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.radioButtonCustom.Location = New System.Drawing.Point(157, 196)
+        Me.radioButtonCustom.Location = New System.Drawing.Point(157, 182)
         Me.radioButtonCustom.Name = "radioButtonCustom"
         Me.radioButtonCustom.Size = New System.Drawing.Size(66, 17)
         Me.radioButtonCustom.TabIndex = 11
         Me.radioButtonCustom.TabStop = True
         Me.radioButtonCustom.Text = "&Custom"
-        Me.radioButtonCustom.UseVisualStyleBackColor = True
+        Me.radioButtonCustom.UseVisualStyleBackColor = False
         Me.radioButtonCustom.Visible = False
         '
         'lblFullDescription
         '
-        Me.lblFullDescription.Location = New System.Drawing.Point(175, 147)
+        Me.lblFullDescription.BackColor = System.Drawing.Color.Transparent
+        Me.lblFullDescription.Location = New System.Drawing.Point(154, 147)
         Me.lblFullDescription.Name = "lblFullDescription"
         Me.lblFullDescription.Size = New System.Drawing.Size(261, 32)
         Me.lblFullDescription.TabIndex = 12
-        Me.lblFullDescription.Text = "Installs all components. (Requires the most disk space.)"
+        Me.lblFullDescription.Text = "Installs all components."
         Me.lblFullDescription.Visible = False
         '
         'lblCustomDescription
         '
-        Me.lblCustomDescription.Location = New System.Drawing.Point(175, 216)
+        Me.lblCustomDescription.BackColor = System.Drawing.Color.Transparent
+        Me.lblCustomDescription.Location = New System.Drawing.Point(154, 202)
         Me.lblCustomDescription.Name = "lblCustomDescription"
-        Me.lblCustomDescription.Size = New System.Drawing.Size(261, 32)
+        Me.lblCustomDescription.Size = New System.Drawing.Size(258, 32)
         Me.lblCustomDescription.TabIndex = 13
         Me.lblCustomDescription.Text = "Select what components will be installed."
         Me.lblCustomDescription.Visible = False
@@ -178,6 +182,7 @@ Partial Class frmAutoClickerSetup
         'radioButtonBeta
         '
         Me.radioButtonBeta.AutoSize = True
+        Me.radioButtonBeta.BackColor = System.Drawing.Color.Transparent
         Me.radioButtonBeta.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.radioButtonBeta.Location = New System.Drawing.Point(157, 72)
         Me.radioButtonBeta.Name = "radioButtonBeta"
@@ -185,12 +190,13 @@ Partial Class frmAutoClickerSetup
         Me.radioButtonBeta.TabIndex = 14
         Me.radioButtonBeta.TabStop = True
         Me.radioButtonBeta.Text = "&Beta"
-        Me.radioButtonBeta.UseVisualStyleBackColor = True
+        Me.radioButtonBeta.UseVisualStyleBackColor = False
         Me.radioButtonBeta.Visible = False
         '
         'lblBetaDescription
         '
-        Me.lblBetaDescription.Location = New System.Drawing.Point(175, 92)
+        Me.lblBetaDescription.BackColor = System.Drawing.Color.Transparent
+        Me.lblBetaDescription.Location = New System.Drawing.Point(154, 92)
         Me.lblBetaDescription.Name = "lblBetaDescription"
         Me.lblBetaDescription.Size = New System.Drawing.Size(261, 32)
         Me.lblBetaDescription.TabIndex = 15
